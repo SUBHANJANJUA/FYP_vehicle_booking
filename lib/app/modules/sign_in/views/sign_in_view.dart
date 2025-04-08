@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 import 'package:vehicle_booking/app/data/app_colors.dart';
+import 'package:vehicle_booking/app/data/util/heading16Green.dart';
 import 'package:vehicle_booking/app/modules/forgot_password/views/forgot_password_view.dart';
 import 'package:vehicle_booking/app/modules/home/views/home_view.dart';
 
@@ -23,43 +24,34 @@ class SignInView extends GetView<SignInController> {
           resizeToAvoidBottomInset: false,
           backgroundColor: AppColors.white,
           body: Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
             child: Form(
               key: formKey,
               child: Column(
                 children: [
                   SizedBox(
-                    height: 150.h,
+                    height: 50.h,
                     width: double.infinity,
                   ),
                   Image.asset(
                     Assets.image.logo.path,
-                    width: 100,
-                    height: 100,
+                    width: 100.w,
+                    height: 100.h,
                   ),
                   SizedBox(
-                    height: 70.h,
+                    height: 20.h,
                   ),
                   Text(
                     'Sign In ',
                     style: TextStyle(
-                        fontSize: 35,
+                        fontSize: 35.sp,
                         fontWeight: FontWeight.w700,
                         color: AppColors.green),
                   ),
                   SizedBox(
-                    height: 70.h,
+                    height: 50.h,
                   ),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      'Email',
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          color: AppColors.green),
-                    ),
-                  ),
+                  Heading16Green(text: "Email"),
                   TextFormField(
                     controller: controller.emailController,
                     decoration: InputDecoration(
@@ -83,18 +75,9 @@ class SignInView extends GetView<SignInController> {
                     },
                   ),
                   SizedBox(
-                    height: 30.h,
+                    height: 15.h,
                   ),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      'Password',
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          color: AppColors.green),
-                    ),
-                  ),
+                  Heading16Green(text: 'Password'),
                   Obx(() {
                     return TextFormField(
                       controller: controller.passwordController,
@@ -133,7 +116,7 @@ class SignInView extends GetView<SignInController> {
                       child: Text(
                         'Forgot Password',
                         style: TextStyle(
-                          fontSize: 16,
+                          fontSize: 20.sp,
                           fontWeight: FontWeight.w500,
                           color: AppColors.green,
                         ),
@@ -143,11 +126,11 @@ class SignInView extends GetView<SignInController> {
                   Spacer(),
                   SignUpRowWidget(),
                   SizedBox(
-                    height: 30.h,
+                    height: 5.h,
                   ),
                   SizedBox(
                       width: double.infinity,
-                      height: 45,
+                      height: 45.h,
                       child: ElevatedButton(
                           onPressed: () {
                             if (formKey.currentState!.validate()) {

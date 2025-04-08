@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:vehicle_booking/app/data/util/heading16Green.dart';
 import 'package:vehicle_booking/app/data/util/signup_row.dart';
 import 'package:vehicle_booking/app/modules/forgot_password/views/otp_view.dart';
 import 'package:vehicle_booking/gen/assets.gen.dart';
@@ -18,43 +19,34 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
           resizeToAvoidBottomInset: false,
           backgroundColor: AppColors.white,
           body: Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
             child: Form(
               key: formKey,
               child: Column(
                 children: [
                   SizedBox(
-                    height: 150.h,
+                    height: 50.h,
                     width: double.infinity,
                   ),
                   Image.asset(
                     Assets.image.logo.path,
-                    width: 100,
-                    height: 100,
+                    width: 100.w,
+                    height: 100.h,
                   ),
                   SizedBox(
-                    height: 70.h,
+                    height: 20.h,
                   ),
                   Text(
                     'Forgot Password',
                     style: TextStyle(
-                        fontSize: 35,
+                        fontSize: 35.sp,
                         fontWeight: FontWeight.w700,
                         color: AppColors.green),
                   ),
                   SizedBox(
                     height: 70.h,
                   ),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      'Email',
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          color: AppColors.green),
-                    ),
-                  ),
+                  Heading16Green(text: 'Email'),
                   TextFormField(
                     controller: controller.emailController,
                     decoration: InputDecoration(
@@ -80,11 +72,11 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
                   Spacer(),
                   SignUpRowWidget(),
                   SizedBox(
-                    height: 30.h,
+                    height: 5.h,
                   ),
                   SizedBox(
                       width: double.infinity,
-                      height: 45,
+                      height: 45.h,
                       child: ElevatedButton(
                           onPressed: () {
                             if (formKey.currentState!.validate()) {

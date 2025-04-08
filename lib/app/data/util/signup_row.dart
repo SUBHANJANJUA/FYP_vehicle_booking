@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:vehicle_booking/app/modules/sign_in/views/sign_in_view.dart';
 
@@ -18,7 +19,7 @@ class SignUpRowWidget extends StatelessWidget {
         Text(
           'Do not have an account? ',
           style: TextStyle(
-            fontSize: 16,
+            fontSize: 15.sp,
             fontWeight: FontWeight.w500,
           ),
         ),
@@ -27,7 +28,7 @@ class SignUpRowWidget extends StatelessWidget {
           child: Text(
             'Sign Up ',
             style: TextStyle(
-                fontSize: 17,
+                fontSize: 17.sp,
                 fontWeight: FontWeight.w700,
                 color: AppColors.green),
           ),

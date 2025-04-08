@@ -19,36 +19,36 @@ class SignupChoiceView extends StatelessWidget {
         child: Scaffold(
       body: Obx(
         () => Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
           child: Column(
             children: [
               SizedBox(
-                height: 250.h,
+                height: 70.h,
                 width: double.infinity,
               ),
               Image.asset(
                 Assets.image.logo.path,
-                width: 100,
-                height: 100,
+                width: 100.w,
+                height: 100.h,
               ),
               SizedBox(
-                height: 70.h,
+                height: 50.h,
               ),
               Text(
                 'Please select a role',
                 style: TextStyle(
-                    fontSize: 25,
+                    fontSize: 25.sp,
                     fontWeight: FontWeight.w700,
                     color: AppColors.green),
               ),
               SizedBox(
-                height: 150.h,
+                height: 50.h,
               ),
               Row(
                 children: [
                   SizedBox(
-                    width: 20,
-                    height: 20,
+                    width: 20.w,
+                    height: 20.h,
                     child: Radio(
                       value: 1,
                       groupValue: controller.selectedValue.value,
@@ -56,7 +56,7 @@ class SignupChoiceView extends StatelessWidget {
                       activeColor: AppColors.green,
                     ),
                   ),
-                  SizedBox(width: 10),
+                  SizedBox(width: 10.w),
                   Text(
                     'Register a vehicle',
                     style: TextStyle(
@@ -66,12 +66,12 @@ class SignupChoiceView extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 60.h),
+              SizedBox(height: 20.h),
               Row(
                 children: [
                   SizedBox(
-                    width: 20,
-                    height: 20,
+                    width: 20.w,
+                    height: 20.h,
                     child: Radio(
                       value: 2,
                       groupValue: controller.selectedValue.value,
@@ -79,11 +79,11 @@ class SignupChoiceView extends StatelessWidget {
                       activeColor: AppColors.green,
                     ),
                   ),
-                  SizedBox(width: 10),
+                  SizedBox(width: 10.w),
                   Text(
                     'Register as a customer',
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 16.sp,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -92,11 +92,11 @@ class SignupChoiceView extends StatelessWidget {
               Spacer(),
               SignInRowWidget(),
               SizedBox(
-                height: 20.h,
+                height: 5.h,
               ),
               SizedBox(
                   width: double.infinity,
-                  height: 45,
+                  height: 45.h,
                   child: ElevatedButton(
                       onPressed: () {
                         Get.to(() => SignupView());
