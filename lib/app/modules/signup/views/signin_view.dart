@@ -1,24 +1,20 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:get/get.dart';
 import 'package:vehicle_booking/app/data/app_colors.dart';
 import 'package:vehicle_booking/app/data/util/heading16Green.dart';
 import 'package:vehicle_booking/app/modules/forgot_password/views/forgot_password_view.dart';
-import 'package:vehicle_booking/app/modules/home/views/home_view.dart';
-
+import 'package:vehicle_booking/app/modules/signup/controllers/signup_controller.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../data/util/signup_row.dart';
-import '../controllers/sign_in_controller.dart';
 
-class SignInView extends GetView<SignInController> {
+class SignInView extends StatelessWidget {
   SignInView({super.key});
   final formKey = GlobalKey<FormState>();
+  final SignupController controller = Get.put(SignupController());
   @override
   Widget build(BuildContext context) {
-    Get.put(SignInController());
+    Get.put(SignupController());
     return SafeArea(
       child: Scaffold(
           resizeToAvoidBottomInset: false,
@@ -134,8 +130,13 @@ class SignInView extends GetView<SignInController> {
                       child: ElevatedButton(
                           onPressed: () {
                             if (formKey.currentState!.validate()) {
-                              log('sign in successfully ');
-                              Get.offAll(() => HomeView());
+                              final email =
+                                  controller.emailController.text.trim();
+                              final password =
+                                  controller.passwordController.text.trim();
+
+                              Get.find<SignupController>()
+                                  .login(email, password);
                             }
                           },
                           child: Text(

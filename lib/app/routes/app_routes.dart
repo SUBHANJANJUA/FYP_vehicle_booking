@@ -4,17 +4,21 @@ part of 'app_pages.dart';
 abstract class Routes {
   Routes._();
   static const HOME = _Paths.HOME;
-  static const SIGN_IN = _Paths.SIGN_IN;
+
   static const FORGOT_PASSWORD = _Paths.FORGOT_PASSWORD;
   static const NEW_PASSWORD = _Paths.FORGOT_PASSWORD + _Paths.NEW_PASSWORD;
   static const SIGNUP = _Paths.SIGNUP;
+  static const OWNER_HOME = _Paths.OWNER_HOME;
+  static const SPLASH_SCREEN = _Paths.SPLASH_SCREEN;
 }
 
 abstract class _Paths {
   _Paths._();
   static const HOME = '/home';
-  static const SIGN_IN = '/sign-in';
+
   static const FORGOT_PASSWORD = '/forgot-password';
   static const NEW_PASSWORD = '/new-password';
   static const SIGNUP = '/signup';
+  static const OWNER_HOME = '/owner-home';
+  static const SPLASH_SCREEN = '/splash-screen';
 }

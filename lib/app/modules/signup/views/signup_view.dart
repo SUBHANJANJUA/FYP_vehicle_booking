@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:get/get.dart';
 import 'package:vehicle_booking/app/data/util/heading16Green.dart';
-import 'package:vehicle_booking/app/modules/home/views/home_view.dart';
-
 import '../../../../gen/assets.gen.dart';
 import '../../../data/app_colors.dart';
 import '../../../data/util/signup_row.dart';
@@ -243,7 +240,7 @@ class SignupView extends GetView<SignupController> {
                                 if (value == null || value.isEmpty) {
                                   return "Enter Contact number";
                                 }
-                                if (value.length == 14) {
+                                if (value.length != 13) {
                                   return "Contect number must be 13 digits";
                                 }
                                 return null;
@@ -322,7 +319,15 @@ class SignupView extends GetView<SignupController> {
                 child: ElevatedButton(
                   onPressed: () {
                     if (_formkey.currentState!.validate()) {
-                      Get.offAll(() => HomeView());
+                      final email = controller.emailController.text.trim();
+                      final password =
+                          controller.passwordController.text.trim();
+                      final userType = controller.selectedValue.value == 1
+                          ? 'driver'
+                          : 'customer';
+
+                      Get.find<SignupController>()
+                          .register(email, password, userType);
                     }
                   },
                   child: Text(

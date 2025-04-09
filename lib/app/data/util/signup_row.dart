@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:vehicle_booking/app/modules/sign_in/views/sign_in_view.dart';
+import 'package:vehicle_booking/app/modules/signup/views/signin_view.dart';
 
 import '../../modules/signup/views/signup_choice.dart';
 import '../app_colors.dart';
