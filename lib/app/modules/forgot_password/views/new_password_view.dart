@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 import 'package:vehicle_booking/app/modules/forgot_password/controllers/forgot_password_controller.dart';
-import 'package:vehicle_booking/app/modules/sign_in/views/sign_in_view.dart';
+import 'package:vehicle_booking/app/modules/signup/views/signin_view.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../data/app_colors.dart';
 import '../../../data/util/signup_row.dart';

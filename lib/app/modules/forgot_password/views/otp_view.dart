@@ -58,30 +58,30 @@ class _OtpViewState extends State<OtpView> {
           resizeToAvoidBottomInset: false,
           backgroundColor: AppColors.white,
           body: Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
             child: Column(
               children: [
                 SizedBox(
-                  height: 150.h,
+                  height: 50.h,
                   width: double.infinity,
                 ),
                 Image.asset(
                   Assets.image.logo.path,
-                  width: 100,
-                  height: 100,
+                  width: 100.w,
+                  height: 100.h,
                 ),
                 SizedBox(
-                  height: 70.h,
+                  height: 20.h,
                 ),
                 Text(
                   'OTP Verification',
                   style: TextStyle(
-                      fontSize: 35,
+                      fontSize: 35.sp,
                       fontWeight: FontWeight.w700,
                       color: AppColors.green),
                 ),
                 SizedBox(
-                  height: 70.h,
+                  height: 40.h,
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 30.w),
@@ -89,13 +89,13 @@ class _OtpViewState extends State<OtpView> {
                     textAlign: TextAlign.center,
                     'Please Enter the 6 digit verification code sent on user@domain.com',
                     style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 16.sp,
                         fontWeight: FontWeight.w500,
                         color: AppColors.green),
                   ),
                 ),
                 SizedBox(
-                  height: 30.h,
+                  height: 20.h,
                 ),
                 Pinput(
                   defaultPinTheme: disablePinTheme,
@@ -117,11 +117,11 @@ class _OtpViewState extends State<OtpView> {
                 Spacer(),
                 SignUpRowWidget(),
                 SizedBox(
-                  height: 30.h,
+                  height: 5.h,
                 ),
                 SizedBox(
                     width: double.infinity,
-                    height: 45,
+                    height: 45.h,
                     child: ElevatedButton(
                         onPressed: () {
                           showPin.value
