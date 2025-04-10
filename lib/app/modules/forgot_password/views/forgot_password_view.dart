@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:vehicle_booking/app/data/util/heading16Green.dart';
 import 'package:vehicle_booking/app/data/util/signup_row.dart';
-import 'package:vehicle_booking/app/modules/forgot_password/views/otp_view.dart';
+import 'package:vehicle_booking/app/modules/signup/views/signin_view.dart';
 import 'package:vehicle_booking/gen/assets.gen.dart';
 import '../../../data/app_colors.dart';
 import '../controllers/forgot_password_controller.dart';
@@ -80,11 +80,12 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
                       child: ElevatedButton(
                           onPressed: () {
                             if (formKey.currentState!.validate()) {
-                              Get.to(() => OtpView());
+                              controller.sendResetEmail();
+                              Get.offAll(SignInView());
                             }
                           },
                           child: Text(
-                            'Next',
+                            'Sign In',
                             style: TextStyle(color: AppColors.white),
                           )))
                 ],

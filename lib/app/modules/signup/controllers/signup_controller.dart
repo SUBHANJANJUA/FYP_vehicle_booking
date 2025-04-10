@@ -39,6 +39,7 @@ class SignupController extends GetxController {
   final vehicleNameController = TextEditingController();
   final vehicleRegistrationController = TextEditingController();
   final contactController = TextEditingController();
+  final locationController = TextEditingController();
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;

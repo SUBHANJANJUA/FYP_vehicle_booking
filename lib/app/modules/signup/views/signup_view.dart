@@ -181,7 +181,7 @@ class SignupView extends GetView<SignupController> {
                               decoration: InputDecoration(
                                 hintText: 'Suzuki Cultus',
                                 prefixIcon: Icon(
-                                  Icons.person,
+                                  Icons.car_crash_outlined,
                                   color: Colors.black.withValues(alpha: 0.50),
                                 ),
                               ),
@@ -242,6 +242,31 @@ class SignupView extends GetView<SignupController> {
                                 }
                                 if (value.length != 13) {
                                   return "Contect number must be 13 digits";
+                                }
+                                return null;
+                              },
+                            ),
+                            SizedBox(
+                              height: 10.h,
+                            ),
+                            Heading16Green(
+                              text: "City",
+                            ),
+                            TextFormField(
+                              controller: controller.locationController,
+                              decoration: InputDecoration(
+                                hintText: 'Sialkot, Punjab',
+                                prefixIcon: Icon(
+                                  Icons.car_crash_outlined,
+                                  color: Colors.black.withValues(alpha: 0.50),
+                                ),
+                              ),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return "Enter your city";
+                                }
+                                if (value.length < 33) {
+                                  return "City must be 3 digits";
                                 }
                                 return null;
                               },
