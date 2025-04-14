@@ -7,7 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:vehicle_booking/app/modules/home/views/home_view.dart';
 import 'package:vehicle_booking/app/modules/owner_home/views/owner_home_view.dart';
-import 'package:vehicle_booking/app/modules/signup/views/signup_view.dart';
+import 'package:vehicle_booking/app/modules/signup/views/signin_view.dart';
 
 class SignupController extends GetxController {
   var selectedValue = 2.obs;
@@ -70,6 +70,7 @@ class SignupController extends GetxController {
   }
 
   // Login
+  // Login
   Future<void> login(String email, String password) async {
     try {
       EasyLoading.show(status: 'Sign In ...');
@@ -100,6 +101,7 @@ class SignupController extends GetxController {
   }
 
   // Optional: Auto login logic
+
   Future<void> checkLoginStatus() async {
     final user = _auth.currentUser;
     if (user != null) {
@@ -107,7 +109,7 @@ class SignupController extends GetxController {
       final userType = doc['userType'];
       _navigateToHome(userType);
     } else {
-      Get.offAll(SignupView());
+      Get.offAll(() => SignInView());
     }
   }
 }

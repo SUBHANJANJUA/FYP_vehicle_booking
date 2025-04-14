@@ -3,6 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 import 'package:vehicle_booking/app/data/app_colors.dart';
+import 'package:vehicle_booking/app/modules/home/views/car_tab_view.dart';
+import 'package:vehicle_booking/app/modules/home/views/home_tab_view.dart';
+import 'package:vehicle_booking/app/modules/home/views/laoder_tab_view.dart';
+import 'package:vehicle_booking/app/modules/home/views/profile_tab_view.dart';
+import 'package:vehicle_booking/app/modules/home/views/self_tab_view.dart';
+import 'package:vehicle_booking/gen/assets.gen.dart';
 
 import '../controllers/home_controller.dart';
 
@@ -10,9 +16,9 @@ class HomeView extends GetView<HomeController> {
   HomeView({super.key});
   final List<Widget> screens = [
     HomeTabView(),
-    const CarsTabView(),
+    CarsTabView(),
     LoaderTabview(),
-    const SelfDriveTabView(),
+    SelfDriveTabView(),
     ProfileTabView(),
   ];
 
@@ -29,7 +35,41 @@ class HomeView extends GetView<HomeController> {
     Get.put(HomeController());
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Hi Subhan!'),
+        title: Row(
+          children: [
+            Image.asset(
+              Assets.image.logo.path,
+              width: 50.w,
+              height: 50.h,
+            ),
+            SizedBox(
+              width: 15.w,
+            ),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    maxLines: 1,
+                    'Hi Subhan!',
+                    style: TextStyle(
+                        fontSize: 25.sp,
+                        fontWeight: FontWeight.w700,
+                        color: AppColors.green),
+                  ),
+                  Text(
+                    maxLines: 1,
+                    'subhanjanjua837@gmail.com',
+                    style: TextStyle(
+                        fontSize: 15.sp,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.grey),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
         backgroundColor: AppColors.white,
       ),
       body: Obx(() => IndexedStack(
@@ -91,61 +131,6 @@ class HomeView extends GetView<HomeController> {
           ? AppColors.green
           : AppColors.black,
       label: label,
-    );
-  }
-}
-
-class HomeTabView extends StatelessWidget {
-  const HomeTabView({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text('Home Tab View'),
-    );
-  }
-}
-
-class CarsTabView extends StatelessWidget {
-  const CarsTabView({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text('CarstabView Tab View'),
-    );
-  }
-}
-
-class LoaderTabview extends StatelessWidget {
-  const LoaderTabview({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text('LoaderTabview Tab View'),
-    );
-  }
-}
-
-class SelfDriveTabView extends StatelessWidget {
-  const SelfDriveTabView({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text('SelfDriveTabView Tab View'),
-    );
-  }
-}
-
-class ProfileTabView extends StatelessWidget {
-  const ProfileTabView({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text('ProfileTabView Tab View'),
     );
   }
 }
