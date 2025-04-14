@@ -20,7 +20,7 @@ class _OtpViewState extends State<OtpView> {
   final defaultPinTheme = PinTheme(
     width: 60,
     height: 78,
-    textStyle: const TextStyle(
+    textStyle: TextStyle(
         fontSize: 25, color: AppColors.green, fontWeight: FontWeight.w600),
     decoration: BoxDecoration(
       border: Border.all(color: AppColors.green, width: 1.5),

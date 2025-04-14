@@ -86,23 +86,23 @@ InputDecorationTheme textFormFieldDecoration() {
     isDense: true,
     // borderRadius: BorderRadius.circular(24),
     enabledBorder: OutlineInputBorder(
-        borderSide: const BorderSide(
+        borderSide: BorderSide(
           color: AppColors.green,
         ),
         borderRadius: BorderRadius.circular(12)),
     focusedBorder: OutlineInputBorder(
-        borderSide: const BorderSide(
+        borderSide: BorderSide(
           color: AppColors.green,
         ),
         borderRadius: BorderRadius.circular(12)),
 
     errorBorder: OutlineInputBorder(
-        borderSide: const BorderSide(
+        borderSide: BorderSide(
           color: AppColors.green,
         ),
         borderRadius: BorderRadius.circular(12)),
     border: OutlineInputBorder(
-        borderSide: const BorderSide(
+        borderSide: BorderSide(
           color: AppColors.green,
         ),
         borderRadius: BorderRadius.circular(12)),

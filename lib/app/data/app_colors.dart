@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 class AppColors {
   AppColors._();
   // AppBar
-  static const Color black = Colors.black;
-  static const Color white = Colors.white;
-  static const Color green = Color(0xff006633);
+  static Color black = Colors.black;
+  static Color white = Colors.white;
+  static Color grey = Colors.grey;
+  static Color green = Color(0xff006633);
+  static Color? lighGreen = Colors.green[50];
 }
