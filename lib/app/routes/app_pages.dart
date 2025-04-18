@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/add_vehicle/bindings/add_vehicle_binding.dart';
+import '../modules/add_vehicle/views/add_vehicle_view.dart';
 import '../modules/forgot_password/bindings/forgot_password_binding.dart';
 import '../modules/forgot_password/views/forgot_password_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -10,6 +12,8 @@ import '../modules/signup/bindings/signup_binding.dart';
 import '../modules/signup/views/signup_view.dart';
 import '../modules/splash_screen/bindings/splash_screen_binding.dart';
 import '../modules/splash_screen/views/splash_screen_view.dart';
+import '../modules/vehicle_detail/bindings/vehicle_detail_binding.dart';
+import '../modules/vehicle_detail/views/vehicle_detail_view.dart';
 
 part 'app_routes.dart';
 
@@ -43,6 +47,23 @@ class AppPages {
       name: _Paths.SPLASH_SCREEN,
       page: () => const SplashScreenView(),
       binding: SplashScreenBinding(),
+    ),
+    GetPage(
+      name: _Paths.VEHICLE_DETAIL,
+      page: () => VehicleDetailView(
+        img: '',
+        name: '',
+        number: '',
+        location: '',
+        description: '',
+        phone: '',
+      ),
+      binding: VehicleDetailBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADD_VEHICLE,
+      page: () => const AddVehicleView(),
+      binding: AddVehicleBinding(),
     ),
   ];
 }
