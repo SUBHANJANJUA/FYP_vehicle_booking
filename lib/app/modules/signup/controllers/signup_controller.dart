@@ -6,10 +6,10 @@ import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:vehicle_booking/app/modules/home/views/home_view.dart';
-import 'package:vehicle_booking/app/modules/owner_home/views/owner_home_view.dart';
 import 'package:vehicle_booking/app/modules/signup/views/signin_view.dart';
 
 class SignupController extends GetxController {
+  RxBool driver = false.obs;
   var selectedValue = 2.obs;
   var vehicletype = 1.obs;
   var ac = 1.obs;
@@ -36,10 +36,9 @@ class SignupController extends GetxController {
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  final vehicleNameController = TextEditingController();
-  final vehicleRegistrationController = TextEditingController();
-  final contactController = TextEditingController();
-  final locationController = TextEditingController();
+  final licenseNumberController = TextEditingController();
+  final licenseExpDateController = TextEditingController();
+  final licenseTypeController = TextEditingController();
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -66,10 +65,10 @@ class SignupController extends GetxController {
       _navigateToHome(userType);
     } catch (e) {
       Get.snackbar('Error', e.toString());
+      EasyLoading.dismiss();
     }
   }
 
-  // Login
   // Login
   Future<void> login(String email, String password) async {
     try {
@@ -88,15 +87,19 @@ class SignupController extends GetxController {
       EasyLoading.dismiss();
     } catch (e) {
       Get.snackbar('Error', e.toString());
+      log(e.toString());
+      EasyLoading.dismiss();
     }
   }
 
   void _navigateToHome(String userType) {
     log('tap after navigation');
     if (userType == 'customer') {
+      driver.value = false;
       Get.offAll(HomeView());
     } else if (userType == 'driver') {
-      Get.offAll(OwnerHomeView());
+      driver.value = true;
+      Get.offAll(HomeView());
     }
   }
 
@@ -111,5 +114,10 @@ class SignupController extends GetxController {
     } else {
       Get.offAll(() => SignInView());
     }
+  }
+
+  Future<void> logout() async {
+    await FirebaseAuth.instance.signOut();
+    Get.offAll(() => SignInView());
   }
 }

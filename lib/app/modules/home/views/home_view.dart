@@ -3,11 +3,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 import 'package:vehicle_booking/app/data/app_colors.dart';
+import 'package:vehicle_booking/app/modules/add_vehicle/views/add_vehicle_view.dart';
 import 'package:vehicle_booking/app/modules/home/views/car_tab_view.dart';
 import 'package:vehicle_booking/app/modules/home/views/home_tab_view.dart';
 import 'package:vehicle_booking/app/modules/home/views/laoder_tab_view.dart';
 import 'package:vehicle_booking/app/modules/home/views/profile_tab_view.dart';
 import 'package:vehicle_booking/app/modules/home/views/self_tab_view.dart';
+import 'package:vehicle_booking/app/modules/signup/controllers/signup_controller.dart';
 import 'package:vehicle_booking/gen/assets.gen.dart';
 
 import '../controllers/home_controller.dart';
@@ -22,6 +24,8 @@ class HomeView extends GetView<HomeController> {
     ProfileTabView(),
   ];
 
+  final SignupController signupcontroller = Get.put(SignupController());
+
   final List<String> appBarTitles = [
     'Home',
     'Cars',
@@ -34,41 +38,46 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     Get.put(HomeController());
     return Scaffold(
+      backgroundColor: AppColors.white,
       appBar: AppBar(
-        title: Row(
-          children: [
-            Image.asset(
-              Assets.image.logo.path,
-              width: 50.w,
-              height: 50.h,
-            ),
-            SizedBox(
-              width: 15.w,
-            ),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    maxLines: 1,
-                    'Hi Subhan!',
-                    style: TextStyle(
-                        fontSize: 25.sp,
-                        fontWeight: FontWeight.w700,
-                        color: AppColors.green),
-                  ),
-                  Text(
-                    maxLines: 1,
-                    'subhanjanjua837@gmail.com',
-                    style: TextStyle(
-                        fontSize: 15.sp,
-                        fontWeight: FontWeight.w500,
-                        color: AppColors.grey),
-                  ),
-                ],
+        surfaceTintColor: AppColors.white,
+        title: InkWell(
+          onTap: () => controller.currentIndex.value = 4,
+          child: Row(
+            children: [
+              Image.asset(
+                Assets.image.logo.path,
+                width: 50.w,
+                height: 50.h,
               ),
-            ),
-          ],
+              SizedBox(
+                width: 15.w,
+              ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      maxLines: 1,
+                      'Hi Subhan!',
+                      style: TextStyle(
+                          fontSize: 25.sp,
+                          fontWeight: FontWeight.w700,
+                          color: AppColors.green),
+                    ),
+                    Text(
+                      maxLines: 1,
+                      'subhan@gmail.com',
+                      style: TextStyle(
+                          fontSize: 15.sp,
+                          fontWeight: FontWeight.w500,
+                          color: AppColors.grey),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
         backgroundColor: AppColors.white,
       ),
@@ -76,16 +85,20 @@ class HomeView extends GetView<HomeController> {
             index: controller.currentIndex.value,
             children: screens,
           )),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: Colors.green, // green background
-        shape: const CircleBorder(), // optional, default is circular
-        child: Icon(
-          Icons.add,
-          color: Colors.white,
-          size: 35.sp, // white icon
-        ),
-      ),
+      floatingActionButton: signupcontroller.driver.value
+          ? FloatingActionButton(
+              onPressed: () {
+                Get.to(() => AddVehicleView());
+              },
+              backgroundColor: Colors.green,
+              shape: const CircleBorder(),
+              child: Icon(
+                Icons.add,
+                color: Colors.white,
+                size: 35.sp,
+              ),
+            )
+          : SizedBox.shrink(),
       bottomNavigationBar: Obx(
         () => BottomNavigationBar(
           type: BottomNavigationBarType.fixed,

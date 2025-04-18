@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:vehicle_booking/app/data/util/heading16Green.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../data/app_colors.dart';
@@ -129,57 +130,13 @@ class SignupView extends GetView<SignupController> {
                   (controller.selectedValue == 1)
                       ? Column(
                           children: [
-                            Row(
-                              children: [
-                                SizedBox(
-                                  width: 20.w,
-                                  height: 20.h,
-                                  child: Radio(
-                                    value: 1,
-                                    groupValue: controller.vehicletype.value,
-                                    onChanged: controller.onVehicleChange,
-                                    activeColor: AppColors.green,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 10.w,
-                                ),
-                                Heading16Green(
-                                  text: 'Passenger Vehicle',
-                                  size: 15,
-                                ),
-                                SizedBox(
-                                  width: 30.w,
-                                ),
-                                SizedBox(
-                                  width: 20.w,
-                                  height: 20.h,
-                                  child: Radio(
-                                    value: 2,
-                                    groupValue: controller.vehicletype.value,
-                                    onChanged: controller.onVehicleChange,
-                                    activeColor: AppColors.green,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 10.w,
-                                ),
-                                Heading16Green(
-                                  text: 'Loader Vehicle',
-                                  size: 15,
-                                )
-                              ],
-                            ),
-                            SizedBox(
-                              height: 10.h,
-                            ),
                             Heading16Green(
-                              text: "Vehicle Name",
+                              text: "License no.",
                             ),
                             TextFormField(
-                              controller: controller.vehicleNameController,
+                              controller: controller.licenseNumberController,
                               decoration: InputDecoration(
-                                hintText: 'Suzuki Cultus',
+                                hintText: 'ST-23-1067',
                                 prefixIcon: Icon(
                                   Icons.car_crash_outlined,
                                   color: Colors.black.withValues(alpha: 0.50),
@@ -187,10 +144,10 @@ class SignupView extends GetView<SignupController> {
                               ),
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
-                                  return "Enter your vechicle name";
+                                  return "Enter your License no.";
                                 }
                                 if (value.length < 3) {
-                                  return "Vehicle name be at least 3 characters";
+                                  return "License no. be at least 3 characters";
                                 }
                                 return null;
                               },
@@ -199,13 +156,57 @@ class SignupView extends GetView<SignupController> {
                               height: 10.h,
                             ),
                             Heading16Green(
-                              text: "Rigistraion No.",
+                              text: "License Expire Date",
                             ),
                             TextFormField(
-                              controller:
-                                  controller.vehicleRegistrationController,
+                              controller: controller.licenseExpDateController,
+                              readOnly: true, // Prevent manual input
+                              onTap: () async {
+                                DateTime? pickedDate = await showDatePicker(
+                                  context: context,
+                                  initialDate: DateTime.now(),
+                                  firstDate: DateTime(1900),
+                                  lastDate: DateTime(2100),
+                                );
+
+                                if (pickedDate != null) {
+                                  controller.licenseExpDateController.text =
+                                      DateFormat('yyyy-MM-dd')
+                                          .format(pickedDate);
+                                }
+                              },
                               decoration: InputDecoration(
-                                hintText: 'XYZ 1234',
+                                hintText: 'Select Expire date',
+                                prefixIcon: Icon(
+                                  Icons.car_crash_outlined,
+                                  color: Colors.black.withOpacity(0.5),
+                                ),
+                              ),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return "Enter License Expire Date";
+                                }
+
+                                DateTime? selectedDate =
+                                    DateTime.tryParse(value);
+                                if (selectedDate == null ||
+                                    selectedDate.isBefore(DateTime.now())) {
+                                  return "Please enter a valid license date";
+                                }
+
+                                return null;
+                              },
+                            ),
+                            SizedBox(
+                              height: 10.h,
+                            ),
+                            Heading16Green(
+                              text: "License Type",
+                            ),
+                            TextFormField(
+                              controller: controller.licenseTypeController,
+                              decoration: InputDecoration(
+                                hintText: 'M/CAR',
                                 prefixIcon: Icon(
                                   Icons.car_crash_outlined,
                                   color: Colors.black.withValues(alpha: 0.50),
@@ -213,110 +214,14 @@ class SignupView extends GetView<SignupController> {
                               ),
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
-                                  return "Enter registration number";
+                                  return "Enter License type";
                                 }
                                 if (value.length < 3) {
-                                  return "Registration be at least 3 characters";
+                                  return "License type be at least 3 characters";
                                 }
                                 return null;
                               },
                             ),
-                            SizedBox(
-                              height: 10.h,
-                            ),
-                            Heading16Green(
-                              text: "Contact No.",
-                            ),
-                            TextFormField(
-                              controller: controller.contactController,
-                              decoration: InputDecoration(
-                                hintText: '+92300 0000000',
-                                prefixIcon: Icon(
-                                  Icons.car_crash_outlined,
-                                  color: Colors.black.withValues(alpha: 0.50),
-                                ),
-                              ),
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return "Enter Contact number";
-                                }
-                                if (value.length != 13) {
-                                  return "Contect number must be 13 digits";
-                                }
-                                return null;
-                              },
-                            ),
-                            SizedBox(
-                              height: 10.h,
-                            ),
-                            Heading16Green(
-                              text: "City",
-                            ),
-                            TextFormField(
-                              controller: controller.locationController,
-                              decoration: InputDecoration(
-                                hintText: 'Sialkot, Punjab',
-                                prefixIcon: Icon(
-                                  Icons.car_crash_outlined,
-                                  color: Colors.black.withValues(alpha: 0.50),
-                                ),
-                              ),
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return "Enter your city";
-                                }
-                                if (value.length < 33) {
-                                  return "City must be 3 digits";
-                                }
-                                return null;
-                              },
-                            ),
-                            SizedBox(
-                              height: 10.h,
-                            ),
-                            (controller.vehicletype.value == 1)
-                                ? Row(
-                                    children: [
-                                      SizedBox(
-                                        width: 20.w,
-                                        height: 20.h,
-                                        child: Radio(
-                                          value: 1,
-                                          groupValue: controller.ac.value,
-                                          onChanged: controller.onAC,
-                                          activeColor: AppColors.green,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 10.w,
-                                      ),
-                                      Heading16Green(
-                                        text: 'AC',
-                                        size: 15,
-                                      ),
-                                      SizedBox(
-                                        width: 30.w,
-                                      ),
-                                      SizedBox(
-                                        width: 20.w,
-                                        height: 20.h,
-                                        child: Radio(
-                                          value: 2,
-                                          groupValue: controller.ac.value,
-                                          onChanged: controller.onAC,
-                                          activeColor: AppColors.green,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 10.w,
-                                      ),
-                                      Heading16Green(
-                                        text: 'Non AC',
-                                        size: 15,
-                                      )
-                                    ],
-                                  )
-                                : SizedBox.shrink(),
                             SizedBox(
                               height: 10.h,
                             ),
