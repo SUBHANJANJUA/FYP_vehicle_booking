@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:get/get.dart';
 import 'package:vehicle_booking/app/data/app_colors.dart';
 import 'package:vehicle_booking/app/modules/add_vehicle/views/add_vehicle_view.dart';
@@ -11,7 +10,6 @@ import 'package:vehicle_booking/app/modules/home/views/profile_tab_view.dart';
 import 'package:vehicle_booking/app/modules/home/views/self_tab_view.dart';
 import 'package:vehicle_booking/app/modules/signup/controllers/signup_controller.dart';
 import 'package:vehicle_booking/gen/assets.gen.dart';
-
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -25,6 +23,7 @@ class HomeView extends GetView<HomeController> {
   ];
 
   final SignupController signupcontroller = Get.put(SignupController());
+  final ProfileController profilecontroller = Get.put(ProfileController());
 
   final List<String> appBarTitles = [
     'Home',
@@ -42,43 +41,58 @@ class HomeView extends GetView<HomeController> {
       appBar: AppBar(
         surfaceTintColor: AppColors.white,
         title: InkWell(
-          onTap: () => controller.currentIndex.value = 4,
-          child: Row(
-            children: [
-              Image.asset(
-                Assets.image.logo.path,
-                width: 50.w,
-                height: 50.h,
-              ),
-              SizedBox(
-                width: 15.w,
-              ),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      maxLines: 1,
-                      'Hi Subhan!',
-                      style: TextStyle(
-                          fontSize: 25.sp,
-                          fontWeight: FontWeight.w700,
-                          color: AppColors.green),
+            onTap: () => controller.currentIndex.value = 4,
+            child: Obx(() {
+              final user = signupcontroller.userModel.value;
+              if (user == null) return CircularProgressIndicator();
+              return Row(
+                children: [
+                  ClipRRect(
+                      borderRadius: BorderRadius.circular(50.r),
+                      child:
+                          //  profilecontroller.pickedImage.value == null
+                          //     ?
+                          Image.asset(
+                        Assets.image.logo.path,
+                        width: 50.w,
+                        height: 50.h,
+                      )
+                      // : Image.file(
+                      //     profilecontroller.pickedImage.value!,
+                      //     fit: BoxFit.cover,
+                      //     width: 50.w,
+                      //     height: 50.h,
+                      //   ),
+                      ),
+                  SizedBox(
+                    width: 15.w,
+                  ),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          maxLines: 1,
+                          'Hi ${user.name}!',
+                          style: TextStyle(
+                              fontSize: 25.sp,
+                              fontWeight: FontWeight.w700,
+                              color: AppColors.green),
+                        ),
+                        Text(
+                          maxLines: 1,
+                          user.email,
+                          style: TextStyle(
+                              fontSize: 15.sp,
+                              fontWeight: FontWeight.w500,
+                              color: AppColors.grey),
+                        ),
+                      ],
                     ),
-                    Text(
-                      maxLines: 1,
-                      'subhan@gmail.com',
-                      style: TextStyle(
-                          fontSize: 15.sp,
-                          fontWeight: FontWeight.w500,
-                          color: AppColors.grey),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
+                  ),
+                ],
+              );
+            })),
         backgroundColor: AppColors.white,
       ),
       body: Obx(() => IndexedStack(

@@ -13,6 +13,7 @@ class ProfileTabView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = signupcontroller.userModel.value;
     return Obx(
       () => Column(children: [
         SizedBox(
@@ -106,7 +107,7 @@ class ProfileTabView extends StatelessWidget {
                         width: 10.h,
                       ),
                       Text(
-                        'Subhan Ahmad',
+                        user!.name,
                         style: TextStyle(
                             fontSize: 16.sp, fontWeight: FontWeight.w600),
                       )
@@ -125,7 +126,7 @@ class ProfileTabView extends StatelessWidget {
                         width: 10.h,
                       ),
                       Text(
-                        'subhan@gmail.com',
+                        user.email,
                         style: TextStyle(
                             fontSize: 16.sp, fontWeight: FontWeight.w600),
                       )
@@ -146,7 +147,7 @@ class ProfileTabView extends StatelessWidget {
                                 width: 10.h,
                               ),
                               Text(
-                                'ST-23-1067 M/CAR',
+                                '${user.licenseNumber} ${user.licenseType}',
                                 style: TextStyle(
                                     fontSize: 16.sp,
                                     fontWeight: FontWeight.w600),

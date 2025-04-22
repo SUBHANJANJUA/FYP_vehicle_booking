@@ -5,6 +5,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:vehicle_booking/app/data/models/user_model.dart';
 import 'package:vehicle_booking/app/modules/home/views/home_view.dart';
 import 'package:vehicle_booking/app/modules/signup/views/signin_view.dart';
 
@@ -42,7 +43,7 @@ class SignupController extends GetxController {
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-
+  final userModel = Rxn<UserModel>();
   // Sign up
   Future<void> register(String email, String password, String userType) async {
     try {
@@ -51,21 +52,29 @@ class SignupController extends GetxController {
         email: email,
         password: password,
       );
-      EasyLoading.showSuccess('Signup Successful!');
-      log('v card');
-      _navigateToHome(userType);
-      EasyLoading.dismiss();
 
-      await _firestore.collection('users').doc(userCred.user!.uid).set({
-        'uid': userCred.user!.uid,
-        'email': email,
-        'userType': userType, // 'customer' or 'driver'
-      });
-      log('tap before navigation');
+      final uid = userCred.user!.uid;
+
+      final userData = UserModel(
+        uid: uid,
+        name: nameController.text,
+        email: emailController.text,
+        userType: userType,
+        licenseNumber: licenseNumberController.text,
+        licenseExpDate: licenseExpDateController.text,
+        licenseType: licenseTypeController.text,
+      );
+
+      await _firestore.collection('users').doc(uid).set(userData.toJson());
+
+      userModel.value = userData;
+
+      EasyLoading.showSuccess('Signup Successful!');
       _navigateToHome(userType);
-    } catch (e) {
-      Get.snackbar('Error', e.toString());
       EasyLoading.dismiss();
+    } catch (e) {
+      EasyLoading.dismiss();
+      Get.snackbar('Error', e.toString());
     }
   }
 
@@ -119,5 +128,15 @@ class SignupController extends GetxController {
   Future<void> logout() async {
     await FirebaseAuth.instance.signOut();
     Get.offAll(() => SignInView());
+  }
+
+  Future<void> loadUserProfile() async {
+    final uid = FirebaseAuth.instance.currentUser?.uid;
+    if (uid == null) return;
+
+    final doc = await _firestore.collection('users').doc(uid).get();
+    if (doc.exists) {
+      userModel.value = UserModel.fromJson(doc.data()!);
+    }
   }
 }
