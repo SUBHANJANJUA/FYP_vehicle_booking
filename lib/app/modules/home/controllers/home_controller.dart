@@ -1,11 +1,16 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:vehicle_booking/app/modules/signup/controllers/signup_controller.dart';
 import 'package:vehicle_booking/gen/assets.gen.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 
 class HomeController extends GetxController
     with GetSingleTickerProviderStateMixin {
+  final SignupController signupcontroller = Get.put(SignupController());
   var currentIndex = 0.obs;
   late TabController tabController;
   var selectedFilterIndex = 0.obs;
@@ -22,6 +27,7 @@ class HomeController extends GetxController
   void onInit() {
     super.onInit();
     tabController = TabController(length: 2, vsync: this);
+    signupcontroller.loadUserProfile();
   }
 
   @override
@@ -378,13 +384,38 @@ class HomeController extends GetxController
 }
 
 class ProfileController extends GetxController {
-  final ImagePicker _picker = ImagePicker();
-  var pickedImage = Rx<File?>(null);
+  final box = GetStorage();
+  final Rxn<File> pickedImage = Rxn<File>();
 
   Future<void> pickImage() async {
-    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
-    if (pickedFile != null) {
-      pickedImage.value = File(pickedFile.path);
+    final ImagePicker picker = ImagePicker();
+    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+
+    if (image != null) {
+      final file = File(image.path);
+      pickedImage.value = file;
+
+      // Convert to base64 and store
+      final bytes = await file.readAsBytes();
+      final base64Image = base64Encode(bytes);
+      box.write('profile_image', base64Image);
     }
+  }
+
+  void loadStoredImage() {
+    final base64Image = box.read('profile_image');
+    if (base64Image != null) {
+      final bytes = base64Decode(base64Image);
+      final file = File('${Directory.systemTemp.path}/profile_image.png');
+      file.writeAsBytesSync(bytes);
+      pickedImage.value = file;
+    }
+  }
+
+  @override
+  void onInit() {
+    loadStoredImage();
+
+    super.onInit();
   }
 }
