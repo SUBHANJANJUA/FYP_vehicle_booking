@@ -282,6 +282,7 @@ class AddVehicleDetailView extends StatelessWidget {
                           }
                           if (_formkey.currentState!.validate()) {
                             Get.offAll(() => HomeView());
+                            // controller.saveVehicle();
                           }
                         },
                         child: Text(

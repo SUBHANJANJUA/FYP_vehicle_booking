@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -10,7 +9,7 @@ import 'package:image_picker/image_picker.dart';
 
 class HomeController extends GetxController
     with GetSingleTickerProviderStateMixin {
-  final SignupController signupcontroller = Get.put(SignupController());
+  final SignupController signupcontroller = Get.find<SignupController>();
   var currentIndex = 0.obs;
   late TabController tabController;
   var selectedFilterIndex = 0.obs;

@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:vehicle_booking/app/data/app_colors.dart';
 import 'package:vehicle_booking/app/modules/home/controllers/home_controller.dart';
 import 'package:vehicle_booking/app/modules/signup/controllers/signup_controller.dart';
+import 'package:vehicle_booking/app/modules/vehicle_detail/views/your_vehicle_view.dart';
 import 'package:vehicle_booking/gen/assets.gen.dart';
 
 class ProfileTabView extends StatelessWidget {
@@ -85,210 +86,215 @@ class ProfileTabView extends StatelessWidget {
             ),
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
-              child: Column(
-                children: [
-                  Text(
-                    "Profile",
-                    style: TextStyle(
-                        fontSize: 25.sp,
-                        fontWeight: FontWeight.w700,
-                        color: AppColors.green),
-                  ),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.person,
-                        color: AppColors.green,
-                      ),
-                      SizedBox(
-                        width: 10.h,
-                      ),
-                      Text(
-                        user!.name,
-                        style: TextStyle(
-                            fontSize: 16.sp, fontWeight: FontWeight.w600),
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.email,
-                        color: AppColors.green,
-                      ),
-                      SizedBox(
-                        width: 10.h,
-                      ),
-                      Text(
-                        user.email,
-                        style: TextStyle(
-                            fontSize: 16.sp, fontWeight: FontWeight.w600),
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  signupcontroller.driver.value
-                      ? Column(children: [
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.gavel,
-                                color: AppColors.green,
-                              ),
-                              SizedBox(
-                                width: 10.h,
-                              ),
-                              Text(
-                                '${user.licenseNumber} ${user.licenseType}',
-                                style: TextStyle(
-                                    fontSize: 16.sp,
-                                    fontWeight: FontWeight.w600),
-                              )
-                            ],
-                          ),
-                          SizedBox(
-                            height: 10.h,
-                          ),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.drive_eta,
-                                color: AppColors.green,
-                              ),
-                              SizedBox(
-                                width: 10.h,
-                              ),
-                              Text(
-                                'Your Vehicles',
-                                style: TextStyle(
-                                    fontSize: 16.sp,
-                                    fontWeight: FontWeight.w600),
-                              )
-                            ],
-                          ),
-                          SizedBox(
-                            height: 10.h,
-                          ),
-                        ])
-                      : SizedBox.shrink(),
-                  InkWell(
-                    onTap: () {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            backgroundColor: AppColors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15.r),
-                            ),
-                            title: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Icon(
-                                  Icons.logout,
-                                  size: 50.sp,
-                                  color: AppColors.green,
-                                ),
-                                SizedBox(height: 10.h),
-                                Text(
-                                  'Are you sure you want to logout from this account?',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 16.sp,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                                SizedBox(height: 20.h),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    // Cancel Button
-                                    GestureDetector(
-                                      onTap: () {
-                                        Get.back();
-                                      },
-                                      child: Container(
-                                        width: 100.w,
-                                        height: 40.h,
-                                        alignment: Alignment.center,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(12.r),
-                                          color: AppColors.white,
-                                          border: Border.all(
-                                              color: AppColors.green),
-                                        ),
-                                        child: Text(
-                                          'Cancel',
-                                          style: TextStyle(
-                                            color: AppColors.green,
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 14.sp,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-
-                                    // Logout Button
-                                    GestureDetector(
-                                      onTap: () {
-                                        signupcontroller.logout();
-                                      },
-                                      child: Container(
-                                        width: 100.w,
-                                        height: 40.h,
-                                        alignment: Alignment.center,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(12.r),
-                                          color: AppColors.green,
-                                        ),
-                                        child: Text(
-                                          'Logout',
-                                          style: TextStyle(
-                                            color: AppColors.white,
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 14.sp,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                          );
-                        },
-                      );
-                    },
-                    child: Row(
+              child: Obx(
+                () => Column(
+                  children: [
+                    Text(
+                      "Profile",
+                      style: TextStyle(
+                          fontSize: 25.sp,
+                          fontWeight: FontWeight.w700,
+                          color: AppColors.green),
+                    ),
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                    Row(
                       children: [
                         Icon(
-                          Icons.power_settings_new_rounded,
+                          Icons.person,
                           color: AppColors.green,
                         ),
                         SizedBox(
                           width: 10.h,
                         ),
                         Text(
-                          'logout',
+                          user?.name ?? "",
                           style: TextStyle(
                               fontSize: 16.sp, fontWeight: FontWeight.w600),
                         )
                       ],
                     ),
-                  )
-                ],
+                    SizedBox(
+                      height: 10.h,
+                    ),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.email,
+                          color: AppColors.green,
+                        ),
+                        SizedBox(
+                          width: 10.h,
+                        ),
+                        Text(
+                          user?.email ?? "",
+                          style: TextStyle(
+                              fontSize: 16.sp, fontWeight: FontWeight.w600),
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10.h,
+                    ),
+                    signupcontroller.driver.value
+                        ? Column(children: [
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.gavel,
+                                  color: AppColors.green,
+                                ),
+                                SizedBox(
+                                  width: 10.h,
+                                ),
+                                Text(
+                                  '${user?.licenseNumber} ${user?.licenseType}',
+                                  style: TextStyle(
+                                      fontSize: 16.sp,
+                                      fontWeight: FontWeight.w600),
+                                )
+                              ],
+                            ),
+                            SizedBox(
+                              height: 10.h,
+                            ),
+                            InkWell(
+                              onTap: () => Get.to(() => YourVehicleView()),
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.drive_eta,
+                                    color: AppColors.green,
+                                  ),
+                                  SizedBox(
+                                    width: 10.h,
+                                  ),
+                                  Text(
+                                    'Your Vehicles',
+                                    style: TextStyle(
+                                        fontSize: 16.sp,
+                                        fontWeight: FontWeight.w600),
+                                  )
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10.h,
+                            ),
+                          ])
+                        : SizedBox.shrink(),
+                    InkWell(
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              backgroundColor: AppColors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15.r),
+                              ),
+                              title: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icon(
+                                    Icons.logout,
+                                    size: 50.sp,
+                                    color: AppColors.green,
+                                  ),
+                                  SizedBox(height: 10.h),
+                                  Text(
+                                    'Are you sure you want to logout from this account?',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 16.sp,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                  SizedBox(height: 20.h),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      // Cancel Button
+                                      GestureDetector(
+                                        onTap: () {
+                                          Get.back();
+                                        },
+                                        child: Container(
+                                          width: 100.w,
+                                          height: 40.h,
+                                          alignment: Alignment.center,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(12.r),
+                                            color: AppColors.white,
+                                            border: Border.all(
+                                                color: AppColors.green),
+                                          ),
+                                          child: Text(
+                                            'Cancel',
+                                            style: TextStyle(
+                                              color: AppColors.green,
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 14.sp,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+
+                                      // Logout Button
+                                      GestureDetector(
+                                        onTap: () {
+                                          signupcontroller.logout();
+                                        },
+                                        child: Container(
+                                          width: 100.w,
+                                          height: 40.h,
+                                          alignment: Alignment.center,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(12.r),
+                                            color: AppColors.green,
+                                          ),
+                                          child: Text(
+                                            'Logout',
+                                            style: TextStyle(
+                                              color: AppColors.white,
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 14.sp,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            );
+                          },
+                        );
+                      },
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.power_settings_new_rounded,
+                            color: AppColors.green,
+                          ),
+                          SizedBox(
+                            width: 10.h,
+                          ),
+                          Text(
+                            'logout',
+                            style: TextStyle(
+                                fontSize: 16.sp, fontWeight: FontWeight.w600),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
           ),

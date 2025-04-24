@@ -10,6 +10,7 @@ import 'package:vehicle_booking/app/modules/home/views/home_view.dart';
 import 'package:vehicle_booking/app/modules/signup/views/signin_view.dart';
 
 class SignupController extends GetxController {
+  //final HomeController homecontroller = Get.find<HomeController>();
   RxBool driver = false.obs;
   var selectedValue = 2.obs;
   var vehicletype = 1.obs;
@@ -91,6 +92,10 @@ class SignupController extends GetxController {
           await _firestore.collection('users').doc(userCred.user!.uid).get();
 
       final userType = doc['userType'];
+
+      // ✅ Load full profile data before navigating
+      await loadUserProfile();
+      // await homecontroller.loadTrukList();
       EasyLoading.showSuccess('Signin Successful!');
       _navigateToHome(userType);
       EasyLoading.dismiss();

@@ -16,7 +16,7 @@ class LoaderTabview extends StatelessWidget {
         Expanded(
           child: ListView.builder(
             itemCount: controller.trukList.length,
-            itemBuilder: (BuildContext context, int index) {
+            itemBuilder: (context, index) {
               final vehicle = controller.trukList[index];
               return Padding(
                 padding: EdgeInsets.symmetric(horizontal: 7.w, vertical: 7.h),

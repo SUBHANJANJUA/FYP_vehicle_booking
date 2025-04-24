@@ -13,6 +13,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await GetStorage.init();
+  Get.put(SignupController());
+  Get.put(HomeController());
   runApp(MyApp());
 }
 
