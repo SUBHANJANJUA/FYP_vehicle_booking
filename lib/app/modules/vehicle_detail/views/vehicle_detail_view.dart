@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -26,6 +28,7 @@ class VehicleDetailView extends GetView<VehicleDetailController> {
   final bool? ac;
   @override
   Widget build(BuildContext context) {
+    Get.put(VehicleDetailController());
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
@@ -113,7 +116,10 @@ class VehicleDetailView extends GetView<VehicleDetailController> {
       bottomNavigationBar: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20.w),
         child: ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              log(phone);
+              controller.callNumber(phone);
+            },
             child: Text(
               'Book Now',
               style: TextStyle(color: AppColors.white),

@@ -41,7 +41,7 @@ class HomeController extends GetxController
       "number": "EA 1354",
       "location": "Pasrur, Sialkot",
       "img": Assets.image.truck.path,
-      "phone": "+92309 7366953",
+      "phone": "+923097366953",
       "description": "Spacious and reliable for intercity transportation."
     },
     {
@@ -49,7 +49,7 @@ class HomeController extends GetxController
       "number": "LEC 9482",
       "location": "Lahore",
       "img": Assets.image.truck.path,
-      "phone": "+92309 7366953",
+      "phone": "+923097366953",
       "description": "Compact and efficient for small goods delivery."
     },
     {
@@ -57,7 +57,7 @@ class HomeController extends GetxController
       "number": "RIY 2105",
       "location": "Rawalpindi",
       "img": Assets.image.truck.path,
-      "phone": "+92309 7366953",
+      "phone": "+923097366953",
       "description": "Durable and ideal for medium-load transport."
     },
     {
@@ -65,7 +65,7 @@ class HomeController extends GetxController
       "number": "BSA 7780",
       "location": "Karachi",
       "img": Assets.image.truck.path,
-      "phone": "+92309 7366953",
+      "phone": "+923097366953",
       "description": "Heavy-duty truck perfect for industrial logistics."
     },
     {
@@ -73,7 +73,7 @@ class HomeController extends GetxController
       "number": "FSD 1122",
       "location": "Faisalabad",
       "img": Assets.image.truck.path,
-      "phone": "+92309 7366953",
+      "phone": "+923097366953",
       "description": "High-capacity vehicle for long-distance hauls."
     },
     {
@@ -81,7 +81,7 @@ class HomeController extends GetxController
       "number": "MNA 4221",
       "location": "Multan",
       "img": Assets.image.truck.path,
-      "phone": "+92309 7366953",
+      "phone": "+923097366953",
       "description": "Economical and ideal for light commercial use."
     },
     {
@@ -89,7 +89,7 @@ class HomeController extends GetxController
       "number": "RWP 8899",
       "location": "Rawalpindi",
       "img": Assets.image.truck.path,
-      "phone": "+92309 7366953",
+      "phone": "+923097366953",
       "description": "Versatile truck with smooth handling and ample space."
     },
     {
@@ -97,7 +97,7 @@ class HomeController extends GetxController
       "number": "HYD 5403",
       "location": "Hyderabad",
       "img": Assets.image.truck.path,
-      "phone": "+92309 7366953",
+      "phone": "+923097366953",
       "description": "Compact yet powerful cargo vehicle."
     },
     {
@@ -105,7 +105,7 @@ class HomeController extends GetxController
       "number": "SKT 6732",
       "location": "Sialkot",
       "img": Assets.image.truck.path,
-      "phone": "+92309 7366953",
+      "phone": "+923097366953",
       "description": "Trusted choice for consistent freight performance."
     },
     {
@@ -113,7 +113,7 @@ class HomeController extends GetxController
       "number": "ISB 3215",
       "location": "Islamabad",
       "img": Assets.image.truck.path,
-      "phone": "+92309 7366953",
+      "phone": "+923097366953",
       "description": "Affordable and durable for everyday transport."
     },
     {
@@ -121,7 +121,7 @@ class HomeController extends GetxController
       "number": "LHR 9090",
       "location": "Lahore",
       "img": Assets.image.truck.path,
-      "phone": "+92309 7366953",
+      "phone": "+923097366953",
       "description": "Perfect for local goods movement in the city."
     },
     {
@@ -129,7 +129,7 @@ class HomeController extends GetxController
       "number": "GRT 5611",
       "location": "Gujrat",
       "img": Assets.image.truck.path,
-      "phone": "+92309 7366953",
+      "phone": "+923097366953",
       "description": "Reliable mini truck with comfortable drive."
     },
     {
@@ -137,7 +137,7 @@ class HomeController extends GetxController
       "number": "KHI 7458",
       "location": "Karachi",
       "img": Assets.image.truck.path,
-      "phone": "+92309 7366953",
+      "phone": "+923097366953",
       "description": "Powerful engine and spacious cargo space."
     },
     {
@@ -145,7 +145,7 @@ class HomeController extends GetxController
       "number": "MUX 4493",
       "location": "Muzaffargarh",
       "img": Assets.image.truck.path,
-      "phone": "+92309 7366953",
+      "phone": "+923097366953",
       "description": "Heavy-duty transport truck for big jobs."
     },
     {
@@ -153,7 +153,7 @@ class HomeController extends GetxController
       "number": "QTA 3266",
       "location": "Quetta",
       "img": Assets.image.truck.path,
-      "phone": "+92309 7366953",
+      "phone": "+923097366953",
       "description": "Built for endurance and long-haul deliveries."
     },
     {
@@ -161,7 +161,7 @@ class HomeController extends GetxController
       "number": "PSH 1159",
       "location": "Peshawar",
       "img": Assets.image.truck.path,
-      "phone": "+92309 7366953",
+      "phone": "+923097366953",
       "description": "Robust vehicle suitable for heavy cargo."
     },
     {
@@ -169,7 +169,7 @@ class HomeController extends GetxController
       "number": "BWP 9001",
       "location": "Bahawalpur",
       "img": Assets.image.truck.path,
-      "phone": "+92309 7366953",
+      "phone": "+923097366953",
       "description": "Compact cargo van with great fuel efficiency."
     },
     {
@@ -177,7 +177,7 @@ class HomeController extends GetxController
       "number": "OKR 7412",
       "location": "Okara",
       "img": Assets.image.truck.path,
-      "phone": "+92309 7366953",
+      "phone": "+923097366953",
       "description": "Reliable loader with sturdy build and balance."
     },
     {
@@ -185,7 +185,7 @@ class HomeController extends GetxController
       "number": "SNG 4428",
       "location": "Sanghar",
       "img": Assets.image.truck.path,
-      "phone": "+92309 7366953",
+      "phone": "+923097366953",
       "description": "Well-built truck, ideal for all types of cargo."
     },
     {
@@ -193,7 +193,7 @@ class HomeController extends GetxController
       "number": "SWL 8081",
       "location": "Sahiwal",
       "img": Assets.image.truck.path,
-      "phone": "+92309 7366953",
+      "phone": "+923097366953",
       "description": "Tough and reliable pickup for versatile use."
     },
   ];
@@ -205,7 +205,7 @@ class HomeController extends GetxController
       "location": "Pasrur, Sialkot",
       "img": Assets.image.cultus.path,
       "ac": true,
-      "phone": "+92309 7366953",
+      "phone": "+923097366953",
       "description": "Comfortable and reliable vehicle available for rent."
     },
     {
@@ -214,7 +214,7 @@ class HomeController extends GetxController
       "location": "Pasrur, Sialkot",
       "img": Assets.image.alto.path,
       "ac": false,
-      "phone": "+92309 7366953",
+      "phone": "+923097366953",
       "description": "Comfortable and reliable vehicle available for rent."
     },
     {
@@ -223,7 +223,7 @@ class HomeController extends GetxController
       "location": "Islamabad",
       "img": Assets.image.cultus.path,
       "ac": true,
-      "phone": "+92309 7366953",
+      "phone": "+923097366953",
       "description": "Comfortable and reliable vehicle available for rent."
     },
     {
@@ -232,7 +232,7 @@ class HomeController extends GetxController
       "location": "Lahore",
       "img": Assets.image.alto.path,
       "ac": true,
-      "phone": "+92309 7366953",
+      "phone": "+923097366953",
       "description": "Comfortable and reliable vehicle available for rent."
     },
     {
@@ -241,7 +241,7 @@ class HomeController extends GetxController
       "location": "Faisalabad",
       "img": Assets.image.cultus.path,
       "ac": true,
-      "phone": "+92309 7366953",
+      "phone": "+923097366953",
       "description": "Comfortable and reliable vehicle available for rent."
     },
     {
@@ -250,7 +250,7 @@ class HomeController extends GetxController
       "location": "Karachi",
       "img": Assets.image.alto.path,
       "ac": false,
-      "phone": "+92309 7366953",
+      "phone": "+923097366953",
       "description": "Comfortable and reliable vehicle available for rent."
     },
     {
@@ -259,7 +259,7 @@ class HomeController extends GetxController
       "location": "Gujrat",
       "img": Assets.image.cultus.path,
       "ac": false,
-      "phone": "+92309 7366953",
+      "phone": "+923097366953",
       "description": "Comfortable and reliable vehicle available for rent."
     },
     {
@@ -268,7 +268,7 @@ class HomeController extends GetxController
       "location": "Sahiwal",
       "img": Assets.image.alto.path,
       "ac": true,
-      "phone": "+92309 7366953",
+      "phone": "+923097366953",
       "description": "Comfortable and reliable vehicle available for rent."
     },
     {
@@ -277,7 +277,7 @@ class HomeController extends GetxController
       "location": "Hyderabad",
       "img": Assets.image.cultus.path,
       "ac": false,
-      "phone": "+92309 7366953",
+      "phone": "+923097366953",
       "description": "Comfortable and reliable vehicle available for rent."
     },
     {
@@ -286,7 +286,7 @@ class HomeController extends GetxController
       "location": "Sialkot",
       "img": Assets.image.alto.path,
       "ac": true,
-      "phone": "+92309 7366953",
+      "phone": "+923097366953",
       "description": "Comfortable and reliable vehicle available for rent."
     },
     {
@@ -295,7 +295,7 @@ class HomeController extends GetxController
       "location": "Bahawalpur",
       "img": Assets.image.cultus.path,
       "ac": true,
-      "phone": "+92309 7366953",
+      "phone": "+923097366953",
       "description": "Comfortable and reliable vehicle available for rent."
     },
     {
@@ -304,7 +304,7 @@ class HomeController extends GetxController
       "location": "Lahore",
       "img": Assets.image.alto.path,
       "ac": true,
-      "phone": "+92309 7366953",
+      "phone": "+923097366953",
       "description": "Comfortable and reliable vehicle available for rent."
     },
     {
@@ -313,7 +313,7 @@ class HomeController extends GetxController
       "location": "Multan",
       "img": Assets.image.cultus.path,
       "ac": false,
-      "phone": "+92309 7366953",
+      "phone": "+923097366953",
       "description": "Comfortable and reliable vehicle available for rent."
     },
     {
@@ -322,7 +322,7 @@ class HomeController extends GetxController
       "location": "Rawalpindi",
       "img": Assets.image.alto.path,
       "ac": true,
-      "phone": "+92309 7366953",
+      "phone": "+923097366953",
       "description": "Comfortable and reliable vehicle available for rent."
     },
     {
@@ -331,7 +331,7 @@ class HomeController extends GetxController
       "location": "Islamabad",
       "img": Assets.image.cultus.path,
       "ac": true,
-      "phone": "+92309 7366953",
+      "phone": "+923097366953",
       "description": "Comfortable and reliable vehicle available for rent."
     },
     {
@@ -340,7 +340,7 @@ class HomeController extends GetxController
       "location": "Lahore",
       "img": Assets.image.alto.path,
       "ac": true,
-      "phone": "+92309 7366953",
+      "phone": "+923097366953",
       "description": "Comfortable and reliable vehicle available for rent."
     },
     {
@@ -349,7 +349,7 @@ class HomeController extends GetxController
       "location": "Faisalabad",
       "img": Assets.image.cultus.path,
       "ac": true,
-      "phone": "+92309 7366953",
+      "phone": "+923097366953",
       "description": "Comfortable and reliable vehicle available for rent."
     },
     {
@@ -358,7 +358,7 @@ class HomeController extends GetxController
       "location": "Sialkot",
       "img": Assets.image.alto.path,
       "ac": false,
-      "phone": "+92309 7366953",
+      "phone": "+923097366953",
       "description": "Comfortable and reliable vehicle available for rent."
     },
     {
@@ -367,7 +367,7 @@ class HomeController extends GetxController
       "location": "Gujrat",
       "img": Assets.image.cultus.path,
       "ac": false,
-      "phone": "+92309 7366953",
+      "phone": "+923097366953",
       "description": "Comfortable and reliable vehicle available for rent."
     },
     {
@@ -376,7 +376,7 @@ class HomeController extends GetxController
       "location": "Karachi",
       "img": Assets.image.alto.path,
       "ac": true,
-      "phone": "+92309 7366953",
+      "phone": "+923097366953",
       "description": "Comfortable and reliable vehicle available for rent."
     },
   ];

@@ -74,7 +74,15 @@ class FeaturedVehicleContainer extends StatelessWidget {
                   Row(
                     children: [
                       Expanded(child: HeadingBlack(text: name)),
-                      ac == true ? TextGry(text: 'AC') : SizedBox.shrink(),
+                      ac == true
+                          ? Text(
+                              'AC',
+                              style: TextStyle(
+                                  fontSize: 16.sp,
+                                  fontWeight: FontWeight.w600,
+                                  color: AppColors.green),
+                            )
+                          : SizedBox.shrink(),
                     ],
                   ),
                   TextGry(text: number),

@@ -95,10 +95,26 @@ class HomeView extends GetView<HomeController> {
             })),
         backgroundColor: AppColors.white,
       ),
-      body: Obx(() => IndexedStack(
-            index: controller.currentIndex.value,
-            children: screens,
-          )),
+      body: Obx(() {
+        return AnimatedSwitcher(
+          duration: const Duration(milliseconds: 300),
+          switchInCurve: Curves.easeIn,
+          switchOutCurve: Curves.easeOut,
+          transitionBuilder: (Widget child, Animation<double> animation) {
+            return ScaleTransition(
+              scale: animation,
+              child: FadeTransition(
+                opacity: animation,
+                child: child,
+              ),
+            );
+          },
+          child: KeyedSubtree(
+            key: ValueKey<int>(controller.currentIndex.value),
+            child: screens[controller.currentIndex.value],
+          ),
+        );
+      }),
       floatingActionButton: signupcontroller.driver.value
           ? FloatingActionButton(
               onPressed: () {
