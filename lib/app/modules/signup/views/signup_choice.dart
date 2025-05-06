@@ -58,7 +58,7 @@ class SignupChoiceView extends StatelessWidget {
                   ),
                   SizedBox(width: 10.w),
                   Text(
-                    'Register a vehicle',
+                    'Register as a driver',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w500,

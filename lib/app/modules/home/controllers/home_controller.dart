@@ -1,7 +1,9 @@
 import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:vehicle_booking/app/data/models/vehicle_model.dart';
 import 'package:vehicle_booking/app/modules/signup/controllers/signup_controller.dart';
 import 'package:vehicle_booking/gen/assets.gen.dart';
 import 'dart:io';
@@ -9,6 +11,18 @@ import 'package:image_picker/image_picker.dart';
 
 class HomeController extends GetxController
     with GetSingleTickerProviderStateMixin {
+  var vehicleList = <VehicleModel>[].obs;
+
+  Future<void> fetchAllVehicles() async {
+    final snapshot = await FirebaseFirestore.instance
+        .collection('vehicles')
+        .orderBy('createdAt', descending: true)
+        .get();
+
+    vehicleList.value =
+        snapshot.docs.map((doc) => VehicleModel.fromJson(doc.data())).toList();
+  }
+
   final SignupController signupcontroller = Get.find<SignupController>();
   var currentIndex = 0.obs;
   late TabController tabController;
@@ -27,6 +41,7 @@ class HomeController extends GetxController
     super.onInit();
     tabController = TabController(length: 2, vsync: this);
     signupcontroller.loadUserProfile();
+    fetchAllVehicles();
   }
 
   @override

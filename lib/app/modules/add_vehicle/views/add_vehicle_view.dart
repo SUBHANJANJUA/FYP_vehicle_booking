@@ -53,8 +53,8 @@ class AddVehicleView extends GetView<AddVehicleController> {
                     height: 20.h,
                     child: Radio(
                       value: 1,
-                      groupValue: controller.selectedValue.value,
-                      onChanged: controller.onChanged,
+                      groupValue: controller.vehicleType.value,
+                      onChanged: controller.onChangedVehicleType,
                       activeColor: AppColors.green,
                     ),
                   ),
@@ -76,8 +76,8 @@ class AddVehicleView extends GetView<AddVehicleController> {
                     height: 20.h,
                     child: Radio(
                       value: 2,
-                      groupValue: controller.selectedValue.value,
-                      onChanged: controller.onChanged,
+                      groupValue: controller.vehicleType.value,
+                      onChanged: controller.onChangedVehicleType,
                       activeColor: AppColors.green,
                     ),
                   ),
@@ -99,14 +99,37 @@ class AddVehicleView extends GetView<AddVehicleController> {
                     height: 20.h,
                     child: Radio(
                       value: 3,
-                      groupValue: controller.selectedValue.value,
-                      onChanged: controller.onChanged,
+                      groupValue: controller.vehicleType.value,
+                      onChanged: controller.onChangedVehicleType,
                       activeColor: AppColors.green,
                     ),
                   ),
                   SizedBox(width: 10.w),
                   Text(
                     'Register a loader vehicle',
+                    style: TextStyle(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 20.h),
+              Row(
+                children: [
+                  SizedBox(
+                    width: 20.w,
+                    height: 20.h,
+                    child: Radio(
+                      value: 4,
+                      groupValue: controller.vehicleType.value,
+                      onChanged: controller.onChangedVehicleType,
+                      activeColor: AppColors.green,
+                    ),
+                  ),
+                  SizedBox(width: 10.w),
+                  Text(
+                    'Register a byke ',
                     style: TextStyle(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w500,
