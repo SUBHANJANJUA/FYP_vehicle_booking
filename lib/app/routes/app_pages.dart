@@ -51,7 +51,7 @@ class AppPages {
     GetPage(
       name: _Paths.VEHICLE_DETAIL,
       page: () => VehicleDetailView(
-        img: '',
+        type: '',
         name: '',
         number: '',
         location: '',

@@ -33,25 +33,29 @@ class SelfDriveTabView extends StatelessWidget {
               children: [
                 SearchFormField(),
                 Expanded(
-                  child: ListView.builder(
-                    itemCount: controller.carList.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      final vehicle = controller.carList[index];
-                      return Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 7.w, vertical: 7.h),
-                        child: FeaturedVehicleContainer(
-                          name: vehicle['name'],
-                          number: vehicle['number'],
-                          location: vehicle['location'],
-                          img: vehicle['img'],
-                          ac: vehicle['ac'],
-                          phone: vehicle['phone'],
-                          description: vehicle['description'],
+                  child: controller.vehicleList.isEmpty
+                      ? Center(child: Text("No vehicles found."))
+                      : ListView.builder(
+                          itemCount: controller.vehicleList.length,
+                          itemBuilder: (context, index) {
+                            final vehicle = controller.vehicleList[index];
+                            return vehicle.vehicleType == "self"
+                                ? Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 20.w, vertical: 7.h),
+                                    child: FeaturedVehicleContainer(
+                                      name: vehicle.name,
+                                      number: vehicle.number,
+                                      location: vehicle.location,
+                                      type: vehicle.vehicleType,
+                                      ac: vehicle.acType == "AC",
+                                      phone: vehicle.contact,
+                                      description: vehicle.description,
+                                    ),
+                                  )
+                                : SizedBox.shrink();
+                          },
                         ),
-                      );
-                    },
-                  ),
                 ),
               ],
             ),
@@ -59,30 +63,33 @@ class SelfDriveTabView extends StatelessWidget {
               children: [
                 SearchFormField(),
                 Expanded(
-                  child: ListView.builder(
-                    itemCount: controller.carList.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      final vehicle = controller.carList[index];
-
-                      if (vehicle['ac'] == true) {
-                        return Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 7.w, vertical: 7.h),
-                          child: FeaturedVehicleContainer(
-                            name: vehicle['name'],
-                            number: vehicle['number'],
-                            location: vehicle['location'],
-                            img: vehicle['img'],
-                            ac: vehicle['ac'],
-                            phone: vehicle['phone'],
-                            description: vehicle['description'],
-                          ),
-                        );
-                      } else {
-                        return const SizedBox.shrink();
-                      }
-                    },
-                  ),
+                  child: controller.vehicleList.isEmpty
+                      ? Center(child: Text("No AC vehicles found."))
+                      : ListView.builder(
+                          itemCount: controller.vehicleList.length,
+                          itemBuilder: (context, index) {
+                            final vehicle = controller.vehicleList[index];
+                            if (vehicle.acType == "AC") {
+                              return vehicle.vehicleType == "passenger"
+                                  ? Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 20.w, vertical: 7.h),
+                                      child: FeaturedVehicleContainer(
+                                        name: vehicle.name,
+                                        number: vehicle.number,
+                                        location: vehicle.location,
+                                        type: vehicle.vehicleType,
+                                        ac: true,
+                                        phone: vehicle.contact,
+                                        description: vehicle.description,
+                                      ),
+                                    )
+                                  : SizedBox.shrink();
+                            } else {
+                              return const SizedBox.shrink();
+                            }
+                          },
+                        ),
                 ),
               ],
             ),

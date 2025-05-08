@@ -14,23 +14,30 @@ class LoaderTabview extends StatelessWidget {
       children: [
         SearchFormField(),
         Expanded(
-          child: ListView.builder(
-            itemCount: controller.trukList.length,
-            itemBuilder: (context, index) {
-              final vehicle = controller.trukList[index];
-              return Padding(
-                padding: EdgeInsets.symmetric(horizontal: 7.w, vertical: 7.h),
-                child: FeaturedVehicleContainer(
-                  name: vehicle['name'],
-                  number: vehicle['number'],
-                  location: vehicle['location'],
-                  img: vehicle['img'],
-                  phone: vehicle['phone'],
-                  description: vehicle['description'],
+          child: controller.vehicleList.isEmpty
+              ? Center(child: Text("No loader vehicles found."))
+              : ListView.builder(
+                  itemCount: controller.vehicleList.length,
+                  itemBuilder: (context, index) {
+                    final vehicle = controller.vehicleList[index];
+
+                    return vehicle.vehicleType == "loader"
+                        ? Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 20.w, vertical: 7.h),
+                            child: FeaturedVehicleContainer(
+                              name: vehicle.name,
+                              number: vehicle.number,
+                              location: vehicle.location,
+                              type: vehicle.vehicleType,
+                              ac: false,
+                              phone: vehicle.contact,
+                              description: vehicle.description,
+                            ),
+                          )
+                        : SizedBox.shrink();
+                  },
                 ),
-              );
-            },
-          ),
         )
       ],
     );

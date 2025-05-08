@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 import 'package:vehicle_booking/app/data/app_colors.dart';
+import 'package:vehicle_booking/app/data/util/custom_appbar.dart';
 import 'package:vehicle_booking/app/modules/add_vehicle/views/add_vehicle_detail_view.dart';
 import 'package:vehicle_booking/gen/assets.gen.dart';
 
@@ -14,11 +15,7 @@ class AddVehicleView extends GetView<AddVehicleController> {
   Widget build(BuildContext context) {
     Get.put(AddVehicleController());
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppColors.white,
-        title: const Text('Add Vehicle'),
-        centerTitle: true,
-      ),
+      appBar: CustomAppBar(title: 'Add Vehicle'),
       body: Obx(
         () => Padding(
           padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),

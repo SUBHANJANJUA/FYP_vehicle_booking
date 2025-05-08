@@ -10,7 +10,7 @@ class AddVehicleController extends GetxController {
   final TextEditingController locationController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
 
-  var acVehicle = 1.obs; // 1 = AC, else NonAC
+  var acVehicle = 2.obs; //
   var vehicleType = 1.obs; // 1 = self, 2 = passenger, 3 = loader, else = bike
 
   void onACvehicle(int? value) {
@@ -47,5 +47,36 @@ class AddVehicleController extends GetxController {
     await FirebaseFirestore.instance
         .collection('vehicles') // Global collection
         .add(vehicle.toJson());
+  }
+
+  Future<void> deleteVehicle(String documentId) async {
+    await FirebaseFirestore.instance
+        .collection('vehicles')
+        .doc(documentId)
+        .delete();
+  }
+
+  Future<void> updateVehicle(String documentId) async {
+    String acType = acVehicle.value == 1 ? "AC" : "NonAC";
+    String vehicleTypeText = vehicleType.value == 1
+        ? "self"
+        : vehicleType.value == 2
+            ? "passenger"
+            : vehicleType.value == 3
+                ? "loader"
+                : "bike";
+
+    await FirebaseFirestore.instance
+        .collection('vehicles')
+        .doc(documentId)
+        .update({
+      'name': nameController.text.trim(),
+      'number': numberController.text.trim(),
+      'contact': contactController.text.trim(),
+      'location': locationController.text.trim(),
+      'description': descriptionController.text.trim(),
+      'acType': acType,
+      'vehicleType': vehicleTypeText,
+    });
   }
 }

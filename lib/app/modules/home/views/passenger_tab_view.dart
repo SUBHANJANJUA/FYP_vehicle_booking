@@ -5,10 +5,9 @@ import 'package:vehicle_booking/app/data/app_colors.dart';
 import 'package:vehicle_booking/app/data/util/featured_vehicle_container.dart';
 import 'package:vehicle_booking/app/data/util/search_form_field.dart';
 import 'package:vehicle_booking/app/modules/home/controllers/home_controller.dart';
-import 'package:vehicle_booking/gen/assets.gen.dart';
 
-class CarsTabView extends StatelessWidget {
-  CarsTabView({super.key});
+class PassengerTabView extends StatelessWidget {
+  PassengerTabView({super.key});
   final HomeController controller = Get.put(HomeController());
 
   @override
@@ -16,6 +15,7 @@ class CarsTabView extends StatelessWidget {
     return Column(
       children: [
         TabBar(
+          dividerColor: Colors.transparent,
           controller: controller.tabController,
           indicator: UnderlineTabIndicator(
             borderSide: BorderSide(width: 4.w, color: AppColors.green),
@@ -44,19 +44,21 @@ class CarsTabView extends StatelessWidget {
                                 itemCount: controller.vehicleList.length,
                                 itemBuilder: (context, index) {
                                   final vehicle = controller.vehicleList[index];
-                                  return Padding(
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 7.w, vertical: 7.h),
-                                    child: FeaturedVehicleContainer(
-                                      name: vehicle.name,
-                                      number: vehicle.number,
-                                      location: vehicle.location,
-                                      img: Assets.image.truck.path,
-                                      ac: vehicle.acType == "AC",
-                                      phone: vehicle.contact,
-                                      description: vehicle.description,
-                                    ),
-                                  );
+                                  return vehicle.vehicleType == "passenger"
+                                      ? Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 20.w, vertical: 7.h),
+                                          child: FeaturedVehicleContainer(
+                                            name: vehicle.name,
+                                            number: vehicle.number,
+                                            location: vehicle.location,
+                                            type: vehicle.vehicleType,
+                                            ac: vehicle.acType == "AC",
+                                            phone: vehicle.contact,
+                                            description: vehicle.description,
+                                          ),
+                                        )
+                                      : SizedBox.shrink();
                                 },
                               ),
                       ),
@@ -75,19 +77,22 @@ class CarsTabView extends StatelessWidget {
                                 itemBuilder: (context, index) {
                                   final vehicle = controller.vehicleList[index];
                                   if (vehicle.acType == "AC") {
-                                    return Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 7.w, vertical: 7.h),
-                                      child: FeaturedVehicleContainer(
-                                        name: vehicle.name,
-                                        number: vehicle.number,
-                                        location: vehicle.location,
-                                        img: Assets.image.alto.path,
-                                        ac: true,
-                                        phone: vehicle.contact,
-                                        description: vehicle.description,
-                                      ),
-                                    );
+                                    return vehicle.vehicleType == "passenger"
+                                        ? Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 20.w,
+                                                vertical: 7.h),
+                                            child: FeaturedVehicleContainer(
+                                              name: vehicle.name,
+                                              number: vehicle.number,
+                                              location: vehicle.location,
+                                              type: vehicle.vehicleType,
+                                              ac: true,
+                                              phone: vehicle.contact,
+                                              description: vehicle.description,
+                                            ),
+                                          )
+                                        : SizedBox.shrink();
                                   } else {
                                     return const SizedBox.shrink();
                                   }

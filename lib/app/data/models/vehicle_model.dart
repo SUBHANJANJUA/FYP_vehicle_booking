@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class VehicleModel {
+  String? documentId;
   final String name;
   final String number;
   final String contact;
@@ -10,6 +13,7 @@ class VehicleModel {
   final DateTime createdAt;
 
   VehicleModel({
+    this.documentId,
     required this.name,
     required this.number,
     required this.contact,
@@ -23,30 +27,34 @@ class VehicleModel {
 
   Map<String, dynamic> toJson() {
     return {
-      "name": name,
-      "number": number,
-      "contact": contact,
-      "location": location,
-      "description": description,
-      "acType": acType,
-      "vehicleType": vehicleType,
-      "userId": userId,
-      "createdAt": createdAt.toIso8601String(),
+      'name': name,
+      'number': number,
+      'contact': contact,
+      'location': location,
+      'description': description,
+      'acType': acType,
+      'vehicleType': vehicleType,
+      'userId': userId,
+      'createdAt': createdAt,
     };
   }
 
-  factory VehicleModel.fromJson(Map<String, dynamic> json) {
+  factory VehicleModel.fromJson(Map<String, dynamic> json, String id) {
+    final createdAtValue = json['createdAt'];
+
     return VehicleModel(
-      name: json["name"] ?? '',
-      number: json["number"] ?? '',
-      contact: json["contact"] ?? '',
-      location: json["location"] ?? '',
-      description: json["description"] ?? '',
-      acType: json["acType"] ?? '',
-      vehicleType: json["vehicleType"] ?? '',
-      userId: json["userId"] ?? '',
-      createdAt:
-          DateTime.parse(json["createdAt"] ?? DateTime.now().toIso8601String()),
+      documentId: id,
+      name: json['name'],
+      number: json['number'],
+      contact: json['contact'],
+      location: json['location'],
+      description: json['description'],
+      acType: json['acType'],
+      vehicleType: json['vehicleType'],
+      userId: json['userId'],
+      createdAt: createdAtValue is Timestamp
+          ? createdAtValue.toDate()
+          : DateTime.tryParse(createdAtValue) ?? DateTime.now(),
     );
   }
 }

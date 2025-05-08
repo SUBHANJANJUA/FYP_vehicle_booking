@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 import 'package:vehicle_booking/app/data/app_colors.dart';
+import 'package:vehicle_booking/app/data/util/custom_appbar.dart';
 
 import '../controllers/vehicle_detail_controller.dart';
 
@@ -14,16 +15,17 @@ class VehicleDetailView extends GetView<VehicleDetailController> {
     required this.name,
     required this.number,
     required this.location,
-    required this.img,
     required this.description,
     required this.phone,
+    required this.type,
     this.ac,
   });
   final String name;
   final String number;
   final String location;
-  final String img;
+
   final String phone;
+  final String type;
   final String description;
   final bool? ac;
   @override
@@ -31,24 +33,29 @@ class VehicleDetailView extends GetView<VehicleDetailController> {
     Get.put(VehicleDetailController());
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: AppBar(
-        backgroundColor: AppColors.white,
-        title: const Text('Vehicle Detail View'),
-        centerTitle: true,
-      ),
+      appBar: CustomAppBar(title: 'Vehicle Details View'),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(15.r),
-                child: Image.asset(
-                  img,
-                  fit: BoxFit.cover,
-                  width: double.infinity,
-                  height: 200.h,
+              Container(
+                width: double.infinity,
+                height: 200.h,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15.r),
+                    color: AppColors.lighGreen),
+                child: Center(
+                  child: Icon(
+                    type == "loader"
+                        ? Icons.fire_truck_outlined
+                        : type == "bike"
+                            ? Icons.motorcycle_outlined
+                            : Icons.directions_car,
+                    color: AppColors.green,
+                    size: 80.sp,
+                  ),
                 ),
               ),
               SizedBox(
