@@ -50,8 +50,12 @@ class AddVehicleDetailView extends StatelessWidget {
                               shape: BoxShape.circle,
                             ),
                             child: Icon(
-                              Icons.drive_eta,
-                              color: Colors.white,
+                              controller.vehicleType == 3
+                                  ? Icons.fire_truck_outlined
+                                  : controller.vehicleType == 4
+                                      ? Icons.motorcycle_outlined
+                                      : Icons.directions_car,
+                              color: AppColors.white,
                               size: 75.sp,
                             ),
                           ),
@@ -121,7 +125,8 @@ class AddVehicleDetailView extends StatelessWidget {
                   TextFormField(
                     controller: controller.contactController,
                     decoration: InputDecoration(
-                      hintText: '+923097366953',
+                      prefixText: "+92",
+                      hintText: '3000000000',
                       prefixIcon: Icon(
                         Icons.car_crash_outlined,
                         color: Colors.black.withValues(alpha: 0.50),
@@ -131,8 +136,8 @@ class AddVehicleDetailView extends StatelessWidget {
                       if (value == null || value.isEmpty) {
                         return "Enter Contact no.";
                       }
-                      if (value.length != 13) {
-                        return "Contact no. be at least 13 characters";
+                      if (value.length != 10) {
+                        return "Contact no. be at least 10 characters";
                       }
                       return null;
                     },
@@ -162,7 +167,8 @@ class AddVehicleDetailView extends StatelessWidget {
                       return null;
                     },
                   ),
-                  controller.vehicleType.value == 3
+                  (controller.vehicleType.value == 3 ||
+                          controller.vehicleType.value == 4)
                       ? SizedBox.shrink()
                       : Column(
                           children: [
@@ -234,7 +240,7 @@ class AddVehicleDetailView extends StatelessWidget {
                       maxLines: 5,
                       controller: controller.descriptionController,
                       decoration: InputDecoration(
-                        hintText: 'This is good car',
+                        hintText: 'Enter Description',
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -261,12 +267,64 @@ class AddVehicleDetailView extends StatelessWidget {
                                         AppColors.red),
                                   ),
                                   onPressed: () async {
-                                    if (documentId != null) {
-                                      await controller
-                                          .deleteVehicle(documentId!);
-                                      homecontroller.resetTabIndex();
-                                      Get.offAll(() => HomeView());
-                                    }
+                                    showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            backgroundColor: AppColors.white,
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        12.r)),
+                                            title: Text(
+                                              "Delete Vehicle",
+                                              style: TextStyle(
+                                                  color: AppColors.green,
+                                                  fontWeight: FontWeight.w700),
+                                            ),
+                                            content: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Text(
+                                                    'Are you sure want to delete this vehicle?'),
+                                                SizedBox(
+                                                  height: 20.h,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.end,
+                                                  spacing: 10.w,
+                                                  children: [
+                                                    TextButton(
+                                                      onPressed: () =>
+                                                          Get.back(),
+                                                      child: Text('Cancal'),
+                                                    ),
+                                                    ElevatedButton(
+                                                        onPressed: () async {
+                                                          if (documentId !=
+                                                              null) {
+                                                            await controller
+                                                                .deleteVehicle(
+                                                                    documentId!);
+                                                            homecontroller
+                                                                .resetTabIndex();
+                                                            Get.offAll(() =>
+                                                                HomeView());
+                                                          }
+                                                        },
+                                                        child: Text(
+                                                          "Delete",
+                                                          style: TextStyle(
+                                                              color: AppColors
+                                                                  .white),
+                                                        ))
+                                                  ],
+                                                )
+                                              ],
+                                            ),
+                                          );
+                                        });
                                   },
                                   child: Text(
                                     'Delele',

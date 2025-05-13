@@ -57,11 +57,17 @@ class SignupChoiceView extends StatelessWidget {
                     ),
                   ),
                   SizedBox(width: 10.w),
-                  Text(
-                    'Register as a driver',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
+                  InkWell(
+                    onTap: () {
+                      controller.selectedValue.value = 1;
+                      controller.onChanged(1);
+                    },
+                    child: Text(
+                      'Register as a driver',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                 ],
@@ -80,11 +86,17 @@ class SignupChoiceView extends StatelessWidget {
                     ),
                   ),
                   SizedBox(width: 10.w),
-                  Text(
-                    'Register as a customer',
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w500,
+                  InkWell(
+                    onTap: () {
+                      controller.selectedValue.value = 2;
+                      controller.onChanged(2);
+                    },
+                    child: Text(
+                      'Register as a customer',
+                      style: TextStyle(
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                 ],

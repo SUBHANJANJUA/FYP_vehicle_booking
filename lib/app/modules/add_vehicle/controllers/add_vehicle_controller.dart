@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:vehicle_booking/app/data/models/vehicle_model.dart';
 
@@ -22,61 +23,95 @@ class AddVehicleController extends GetxController {
   }
 
   /// Save vehicle globally in shared `vehicles` collection
+
   Future<void> saveVehicleToFirebase({required String userId}) async {
-    String acType = acVehicle.value == 1 ? "AC" : "NonAC";
-    String vehicleTypeText = vehicleType.value == 1
-        ? "self"
-        : vehicleType.value == 2
-            ? "passenger"
-            : vehicleType.value == 3
-                ? "loader"
-                : "bike";
+    try {
+      EasyLoading.show(status: 'Saving vehicle...');
 
-    VehicleModel vehicle = VehicleModel(
-      name: nameController.text.trim(),
-      number: numberController.text.trim(),
-      contact: contactController.text.trim(),
-      location: locationController.text.trim(),
-      description: descriptionController.text.trim(),
-      acType: acType,
-      vehicleType: vehicleTypeText,
-      userId: userId,
-      createdAt: DateTime.now(),
-    );
+      String acType = acVehicle.value == 1 ? "AC" : "NonAC";
+      String vehicleTypeText = vehicleType.value == 1
+          ? "self"
+          : vehicleType.value == 2
+              ? "passenger"
+              : vehicleType.value == 3
+                  ? "loader"
+                  : "bike";
 
-    await FirebaseFirestore.instance
-        .collection('vehicles') // Global collection
-        .add(vehicle.toJson());
+      VehicleModel vehicle = VehicleModel(
+        name: nameController.text.trim(),
+        number: numberController.text.trim(),
+        contact: "+92${contactController.text.trim()}",
+        location: locationController.text.trim(),
+        description: descriptionController.text.trim(),
+        acType: acType,
+        vehicleType: vehicleTypeText,
+        userId: userId,
+        createdAt: DateTime.now(),
+      );
+
+      await FirebaseFirestore.instance
+          .collection('vehicles')
+          .add(vehicle.toJson());
+
+      EasyLoading.dismiss();
+      EasyLoading.showSuccess('Vehicle saved successfully');
+    } catch (e) {
+      EasyLoading.dismiss();
+      EasyLoading.showError('Failed to save vehicle');
+      print('Error saving vehicle: $e');
+    }
   }
 
   Future<void> deleteVehicle(String documentId) async {
-    await FirebaseFirestore.instance
-        .collection('vehicles')
-        .doc(documentId)
-        .delete();
+    try {
+      EasyLoading.show(status: 'Deleting vehicle...');
+
+      await FirebaseFirestore.instance
+          .collection('vehicles')
+          .doc(documentId)
+          .delete();
+
+      EasyLoading.dismiss();
+      EasyLoading.showSuccess('Vehicle deleted successfully');
+    } catch (e) {
+      EasyLoading.dismiss();
+      EasyLoading.showError('Failed to delete vehicle');
+      print('Error deleting vehicle: $e');
+    }
   }
 
   Future<void> updateVehicle(String documentId) async {
-    String acType = acVehicle.value == 1 ? "AC" : "NonAC";
-    String vehicleTypeText = vehicleType.value == 1
-        ? "self"
-        : vehicleType.value == 2
-            ? "passenger"
-            : vehicleType.value == 3
-                ? "loader"
-                : "bike";
+    try {
+      EasyLoading.show(status: 'Updating vehicle...');
 
-    await FirebaseFirestore.instance
-        .collection('vehicles')
-        .doc(documentId)
-        .update({
-      'name': nameController.text.trim(),
-      'number': numberController.text.trim(),
-      'contact': contactController.text.trim(),
-      'location': locationController.text.trim(),
-      'description': descriptionController.text.trim(),
-      'acType': acType,
-      'vehicleType': vehicleTypeText,
-    });
+      String acType = acVehicle.value == 1 ? "AC" : "NonAC";
+      String vehicleTypeText = vehicleType.value == 1
+          ? "self"
+          : vehicleType.value == 2
+              ? "passenger"
+              : vehicleType.value == 3
+                  ? "loader"
+                  : "bike";
+
+      await FirebaseFirestore.instance
+          .collection('vehicles')
+          .doc(documentId)
+          .update({
+        'name': nameController.text.trim(),
+        'number': numberController.text.trim(),
+        'contact': contactController.text.trim(),
+        'location': locationController.text.trim(),
+        'description': descriptionController.text.trim(),
+        'acType': acType,
+        'vehicleType': vehicleTypeText,
+      });
+
+      EasyLoading.dismiss();
+      EasyLoading.showSuccess('Vehicle updated successfully');
+    } catch (e) {
+      EasyLoading.dismiss();
+      EasyLoading.showError('Failed to update vehicle');
+      print('Error updating vehicle: $e');
+    }
   }
 }

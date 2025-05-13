@@ -56,11 +56,17 @@ class AddVehicleView extends GetView<AddVehicleController> {
                     ),
                   ),
                   SizedBox(width: 10.w),
-                  Text(
-                    'Register a self drive car',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
+                  InkWell(
+                    onTap: () {
+                      controller.vehicleType.value = 1;
+                      controller.onChangedVehicleType(1);
+                    },
+                    child: Text(
+                      'Register a self drive car',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                 ],
@@ -79,11 +85,17 @@ class AddVehicleView extends GetView<AddVehicleController> {
                     ),
                   ),
                   SizedBox(width: 10.w),
-                  Text(
-                    'Register a passenger vehicle',
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w500,
+                  InkWell(
+                    onTap: () {
+                      controller.vehicleType.value = 2;
+                      controller.onChangedVehicleType(2);
+                    },
+                    child: Text(
+                      'Register a passenger vehicle',
+                      style: TextStyle(
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                 ],
@@ -102,11 +114,17 @@ class AddVehicleView extends GetView<AddVehicleController> {
                     ),
                   ),
                   SizedBox(width: 10.w),
-                  Text(
-                    'Register a loader vehicle',
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w500,
+                  InkWell(
+                    onTap: () {
+                      controller.vehicleType.value = 3;
+                      controller.onChangedVehicleType(3);
+                    },
+                    child: Text(
+                      'Register a loader vehicle',
+                      style: TextStyle(
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                 ],
@@ -125,11 +143,17 @@ class AddVehicleView extends GetView<AddVehicleController> {
                     ),
                   ),
                   SizedBox(width: 10.w),
-                  Text(
-                    'Register a byke ',
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w500,
+                  InkWell(
+                    onTap: () {
+                      controller.vehicleType.value = 4;
+                      controller.onChangedVehicleType(4);
+                    },
+                    child: Text(
+                      'Register a byke ',
+                      style: TextStyle(
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                 ],
