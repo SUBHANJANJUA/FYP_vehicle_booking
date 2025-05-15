@@ -8,36 +8,40 @@ import 'package:vehicle_booking/app/modules/home/controllers/home_controller.dar
 class BykeTabview extends StatelessWidget {
   BykeTabview({super.key});
   final HomeController controller = Get.put(HomeController());
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SearchFormField(),
+        SearchFormField(
+          controller: controller.bykeController,
+          onChanged: (value) => controller.searchBike.value = value,
+        ),
         Expanded(
-          child: controller.vehicleList.isEmpty
-              ? Center(child: Text("No Byke found."))
-              : ListView.builder(
-                  itemCount: controller.vehicleList.length,
-                  itemBuilder: (context, index) {
-                    final vehicle = controller.vehicleList[index];
-
-                    return vehicle.vehicleType == "bike"
-                        ? Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 20.w, vertical: 7.h),
-                            child: FeaturedVehicleContainer(
-                              name: vehicle.name,
-                              number: vehicle.number,
-                              location: vehicle.location,
-                              type: vehicle.vehicleType,
-                              ac: false,
-                              phone: vehicle.contact,
-                              description: vehicle.description,
-                            ),
-                          )
-                        : SizedBox.shrink();
-                  },
-                ),
+          child: Obx(() {
+            final bikes = controller.filteredBikes;
+            return bikes.isEmpty
+                ? Center(child: Text("No Byke found."))
+                : ListView.builder(
+                    itemCount: bikes.length,
+                    itemBuilder: (context, index) {
+                      final vehicle = bikes[index];
+                      return Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 20.w, vertical: 7.h),
+                        child: FeaturedVehicleContainer(
+                          name: vehicle.name,
+                          number: vehicle.number,
+                          location: vehicle.location,
+                          type: vehicle.vehicleType,
+                          ac: false,
+                          phone: vehicle.contact,
+                          description: vehicle.description,
+                        ),
+                      );
+                    },
+                  );
+          }),
         )
       ],
     );

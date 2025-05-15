@@ -8,94 +8,108 @@ import 'package:vehicle_booking/app/modules/home/controllers/home_controller.dar
 
 class SelfDriveTabView extends StatelessWidget {
   SelfDriveTabView({super.key});
-
   final HomeController controller = Get.put(HomeController());
+
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      TabBar(
-        dividerColor: AppColors.white,
-        controller: controller.tabController,
-        indicator: UnderlineTabIndicator(
-          borderSide: BorderSide(width: 4.w, color: AppColors.green),
-        ),
-        labelColor: AppColors.black,
-        unselectedLabelColor: AppColors.grey,
-        labelStyle: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w500),
-        tabs: [Tab(text: 'All Cars'), Tab(text: 'AC Cars')],
-      ),
-      SizedBox(height: 20.h),
-      Expanded(
-        child: TabBarView(
+    return Column(
+      children: [
+        TabBar(
+          dividerColor: AppColors.white,
           controller: controller.tabController,
-          children: [
-            Column(
-              children: [
-                SearchFormField(),
-                Expanded(
-                  child: controller.vehicleList.isEmpty
-                      ? Center(child: Text("No vehicles found."))
-                      : ListView.builder(
-                          itemCount: controller.vehicleList.length,
-                          itemBuilder: (context, index) {
-                            final vehicle = controller.vehicleList[index];
-                            return vehicle.vehicleType == "self"
-                                ? Padding(
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 20.w, vertical: 7.h),
-                                    child: FeaturedVehicleContainer(
-                                      name: vehicle.name,
-                                      number: vehicle.number,
-                                      location: vehicle.location,
-                                      type: vehicle.vehicleType,
-                                      ac: vehicle.acType == "AC",
-                                      phone: vehicle.contact,
-                                      description: vehicle.description,
-                                    ),
-                                  )
-                                : SizedBox.shrink();
-                          },
-                        ),
-                ),
-              ],
-            ),
-            Column(
-              children: [
-                SearchFormField(),
-                Expanded(
-                  child: controller.vehicleList.isEmpty
-                      ? Center(child: Text("No AC vehicles found."))
-                      : ListView.builder(
-                          itemCount: controller.vehicleList.length,
-                          itemBuilder: (context, index) {
-                            final vehicle = controller.vehicleList[index];
-                            if (vehicle.acType == "AC") {
-                              return vehicle.vehicleType == "passenger"
-                                  ? Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 20.w, vertical: 7.h),
-                                      child: FeaturedVehicleContainer(
-                                        name: vehicle.name,
-                                        number: vehicle.number,
-                                        location: vehicle.location,
-                                        type: vehicle.vehicleType,
-                                        ac: true,
-                                        phone: vehicle.contact,
-                                        description: vehicle.description,
-                                      ),
-                                    )
-                                  : SizedBox.shrink();
-                            } else {
-                              return const SizedBox.shrink();
-                            }
-                          },
-                        ),
-                ),
-              ],
-            ),
+          indicator: UnderlineTabIndicator(
+            borderSide: BorderSide(width: 4.w, color: AppColors.green),
+          ),
+          labelColor: AppColors.black,
+          unselectedLabelColor: AppColors.grey,
+          labelStyle: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w500),
+          tabs: const [
+            Tab(text: 'All Cars'),
+            Tab(text: 'AC Cars'),
           ],
         ),
-      ),
-    ]);
+        SizedBox(height: 20.h),
+        Expanded(
+          child: Obx(() {
+            final selfCars = controller.filteredSelfDrives;
+            final acSelfCars = selfCars.where((v) => v.acType == "AC").toList();
+
+            return TabBarView(
+              controller: controller.tabController,
+              children: [
+                /// All Self-Drive Cars Tab
+                Column(
+                  children: [
+                    SearchFormField(
+                      controller: controller.selfController,
+                      onChanged: (value) =>
+                          controller.searchSelfDrive.value = value,
+                    ),
+                    Expanded(
+                      child: selfCars.isEmpty
+                          ? Center(child: Text("No self-drive vehicles found."))
+                          : ListView.builder(
+                              itemCount: selfCars.length,
+                              itemBuilder: (context, index) {
+                                final vehicle = selfCars[index];
+                                return Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 20.w, vertical: 7.h),
+                                  child: FeaturedVehicleContainer(
+                                    name: vehicle.name,
+                                    number: vehicle.number,
+                                    location: vehicle.location,
+                                    type: vehicle.vehicleType,
+                                    ac: vehicle.acType == "AC",
+                                    phone: vehicle.contact,
+                                    description: vehicle.description,
+                                  ),
+                                );
+                              },
+                            ),
+                    ),
+                  ],
+                ),
+
+                /// AC Self-Drive Cars Tab
+                Column(
+                  children: [
+                    SearchFormField(
+                      controller: controller.selfController,
+                      onChanged: (value) =>
+                          controller.searchSelfDrive.value = value,
+                    ),
+                    Expanded(
+                      child: acSelfCars.isEmpty
+                          ? Center(
+                              child: Text("No AC self-drive vehicles found."))
+                          : ListView.builder(
+                              itemCount: acSelfCars.length,
+                              itemBuilder: (context, index) {
+                                final vehicle = acSelfCars[index];
+                                return Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 20.w, vertical: 7.h),
+                                  child: FeaturedVehicleContainer(
+                                    name: vehicle.name,
+                                    number: vehicle.number,
+                                    location: vehicle.location,
+                                    type: vehicle.vehicleType,
+                                    ac: true,
+                                    phone: vehicle.contact,
+                                    description: vehicle.description,
+                                  ),
+                                );
+                              },
+                            ),
+                    ),
+                  ],
+                ),
+              ],
+            );
+          }),
+        ),
+      ],
+    );
   }
 }

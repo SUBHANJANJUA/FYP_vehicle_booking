@@ -10,7 +10,49 @@ import 'package:image_picker/image_picker.dart';
 
 class HomeController extends GetxController
     with GetSingleTickerProviderStateMixin {
+  final TextEditingController bykeController = TextEditingController();
+  final TextEditingController passengerController = TextEditingController();
+  final TextEditingController loaderController = TextEditingController();
+  final TextEditingController selfController = TextEditingController();
+
   var vehicleList = <VehicleModel>[].obs;
+
+  // Per-tab search fields
+  var searchBike = ''.obs;
+  var searchPassenger = ''.obs;
+  var searchLoader = ''.obs;
+  var searchSelfDrive = ''.obs;
+
+  // Filtered lists per tab
+  List<VehicleModel> get filteredBikes => vehicleList
+      .where((v) =>
+          v.vehicleType == 'bike' &&
+          v.location.toLowerCase().contains(searchBike.value.toLowerCase()))
+      .toList();
+
+  List<VehicleModel> get filteredPassenger => vehicleList
+      .where((v) =>
+          v.vehicleType == 'passenger' &&
+          v.location
+              .toLowerCase()
+              .contains(searchPassenger.value.toLowerCase()))
+      .toList();
+
+  List<VehicleModel> get filteredLoaders => vehicleList
+      .where((v) =>
+          v.vehicleType == 'loader' &&
+          v.location.toLowerCase().contains(searchLoader.value.toLowerCase()))
+      .toList();
+
+  List<VehicleModel> get filteredSelfDrives => vehicleList
+      .where((v) =>
+          v.vehicleType == 'self' &&
+          v.location
+              .toLowerCase()
+              .contains(searchSelfDrive.value.toLowerCase()))
+      .toList();
+
+  // var vehicleList = <VehicleModel>[].obs;
 
   Future<void> fetchAllVehicles() async {
     final snapshot = await FirebaseFirestore.instance
