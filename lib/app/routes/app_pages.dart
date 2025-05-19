@@ -45,13 +45,13 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.SPLASH_SCREEN,
-      page: () => const SplashScreenView(),
+      page: () => SplashScreenView(),
       binding: SplashScreenBinding(),
     ),
     GetPage(
       name: _Paths.VEHICLE_DETAIL,
       page: () => VehicleDetailView(
-        img: '',
+        type: '',
         name: '',
         number: '',
         location: '',

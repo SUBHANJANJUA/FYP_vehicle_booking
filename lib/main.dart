@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:vehicle_booking/app/data/app_colors.dart';
 import 'package:vehicle_booking/app/modules/home/controllers/home_controller.dart';
 import 'package:vehicle_booking/app/modules/signup/controllers/signup_controller.dart';
 import 'package:vehicle_booking/theme.dart';
@@ -15,6 +16,7 @@ void main() async {
   await GetStorage.init();
   Get.put(SignupController());
   Get.put(HomeController());
+  configEasyLoading();
   runApp(MyApp());
 }
 
@@ -39,4 +41,16 @@ class MyApp extends StatelessWidget {
       },
     );
   }
+}
+
+void configEasyLoading() {
+  EasyLoading.instance
+    ..indicatorType = EasyLoadingIndicatorType.fadingCircle
+    ..loadingStyle = EasyLoadingStyle.custom
+    ..backgroundColor = AppColors.green
+    ..indicatorColor = AppColors.lighGreen
+    ..textColor = AppColors.lighGreen
+    ..maskColor = Colors.black.withOpacity(0.5)
+    ..userInteractions = false
+    ..dismissOnTap = false;
 }

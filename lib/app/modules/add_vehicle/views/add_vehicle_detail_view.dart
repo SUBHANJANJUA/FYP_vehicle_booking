@@ -2,23 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:vehicle_booking/app/data/app_colors.dart';
+import 'package:vehicle_booking/app/data/util/custom_appbar.dart';
 import 'package:vehicle_booking/app/data/util/heading16Green.dart';
 import 'package:vehicle_booking/app/modules/add_vehicle/controllers/add_vehicle_controller.dart';
+import 'package:vehicle_booking/app/modules/home/controllers/home_controller.dart';
 import 'package:vehicle_booking/app/modules/home/views/home_view.dart';
+import 'package:vehicle_booking/app/modules/signup/controllers/signup_controller.dart';
 
 class AddVehicleDetailView extends StatelessWidget {
-  AddVehicleDetailView({super.key});
+  AddVehicleDetailView({
+    super.key,
+    this.edit = false,
+    this.documentId,
+  });
+
   final AddVehicleController controller = Get.put(AddVehicleController());
+  final SignupController signupcontroller = Get.put(SignupController());
+  final HomeController homecontroller = Get.put(HomeController());
+  final bool? edit;
+  final String? documentId;
   final _formkey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       //  resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        backgroundColor: AppColors.white,
-        surfaceTintColor: AppColors.white,
-        title: Text('Add Vehicle Detail'),
-      ),
+
+      appBar: CustomAppBar(title: 'Add Vehicle Details'),
       body: Obx(
         () => Form(
           key: _formkey,
@@ -40,42 +49,17 @@ class AddVehicleDetailView extends StatelessWidget {
                               color: AppColors.green,
                               shape: BoxShape.circle,
                             ),
-                            child: controller.pickedImage.value != null
-                                ? ClipOval(
-                                    child: Image.file(
-                                      controller.pickedImage.value!,
-                                      fit: BoxFit.cover,
-                                      width: 100.w,
-                                      height: 100.h,
-                                    ),
-                                  )
-                                : Icon(
-                                    Icons.drive_eta,
-                                    color: Colors.white,
-                                    size: 100.sp,
-                                  ),
-                          ),
-                        ),
-                        Positioned(
-                          top: 70.h,
-                          right: 120.w,
-                          child: InkWell(
-                            onTap: controller.pickImage,
-                            child: Container(
-                              width: 40.w,
-                              height: 40.h,
-                              decoration: BoxDecoration(
-                                color: AppColors.lighGreen,
-                                shape: BoxShape.circle,
-                              ),
-                              child: Icon(
-                                Icons.photo,
-                                color: AppColors.green,
-                                size: 20.sp,
-                              ),
+                            child: Icon(
+                              controller.vehicleType == 3
+                                  ? Icons.fire_truck_outlined
+                                  : controller.vehicleType == 4
+                                      ? Icons.motorcycle_outlined
+                                      : Icons.directions_car,
+                              color: AppColors.white,
+                              size: 75.sp,
                             ),
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
@@ -87,8 +71,9 @@ class AddVehicleDetailView extends StatelessWidget {
                   ),
                   TextFormField(
                     controller: controller.nameController,
+                    readOnly: edit == true,
                     decoration: InputDecoration(
-                      hintText: 'Suzuki Cultus',
+                      hintText: 'Vehicle name',
                       prefixIcon: Icon(
                         Icons.car_crash_outlined,
                         color: Colors.black.withValues(alpha: 0.50),
@@ -111,7 +96,9 @@ class AddVehicleDetailView extends StatelessWidget {
                     text: "Vehicle Registration no.",
                   ),
                   TextFormField(
+                    readOnly: edit == true,
                     controller: controller.numberController,
+                    textCapitalization: TextCapitalization.characters,
                     decoration: InputDecoration(
                       hintText: 'LEC-10-661',
                       prefixIcon: Icon(
@@ -138,7 +125,8 @@ class AddVehicleDetailView extends StatelessWidget {
                   TextFormField(
                     controller: controller.contactController,
                     decoration: InputDecoration(
-                      hintText: '0309 7366953',
+                      prefixText: "+92",
+                      hintText: '3000000000',
                       prefixIcon: Icon(
                         Icons.car_crash_outlined,
                         color: Colors.black.withValues(alpha: 0.50),
@@ -148,8 +136,8 @@ class AddVehicleDetailView extends StatelessWidget {
                       if (value == null || value.isEmpty) {
                         return "Enter Contact no.";
                       }
-                      if (value.length != 11) {
-                        return "Contact no. be at least 11 characters";
+                      if (value.length != 10) {
+                        return "Contact no. be at least 10 characters";
                       }
                       return null;
                     },
@@ -179,7 +167,8 @@ class AddVehicleDetailView extends StatelessWidget {
                       return null;
                     },
                   ),
-                  controller.selectedValue.value == 3
+                  (controller.vehicleType.value == 3 ||
+                          controller.vehicleType.value == 4)
                       ? SizedBox.shrink()
                       : Column(
                           children: [
@@ -251,7 +240,7 @@ class AddVehicleDetailView extends StatelessWidget {
                       maxLines: 5,
                       controller: controller.descriptionController,
                       decoration: InputDecoration(
-                        hintText: 'This is good car',
+                        hintText: 'Enter Description',
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -267,30 +256,126 @@ class AddVehicleDetailView extends StatelessWidget {
                   SizedBox(
                     height: 20.h,
                   ),
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                        onPressed: () {
-                          if (controller.pickedImage.value == null) {
-                            Get.snackbar(
-                              "Image Required",
-                              "Please upload a vehicle photo",
-                              backgroundColor: AppColors.lighGreen,
-                              colorText: AppColors.green,
-                            );
-                            return;
-                          }
-                          if (_formkey.currentState!.validate()) {
-                            Get.offAll(() => HomeView());
-                            // controller.saveVehicle();
-                          }
-                        },
-                        child: Text(
-                          'Register',
-                          style:
-                              TextStyle(fontSize: 20, color: AppColors.white),
-                        )),
-                  ),
+                  edit == true
+                      ? Column(
+                          children: [
+                            SizedBox(
+                              width: double.infinity,
+                              child: ElevatedButton(
+                                  style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty.all(
+                                        AppColors.red),
+                                  ),
+                                  onPressed: () async {
+                                    showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            backgroundColor: AppColors.white,
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        12.r)),
+                                            title: Text(
+                                              "Delete Vehicle",
+                                              style: TextStyle(
+                                                  color: AppColors.green,
+                                                  fontWeight: FontWeight.w700),
+                                            ),
+                                            content: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Text(
+                                                    'Are you sure want to delete this vehicle?'),
+                                                SizedBox(
+                                                  height: 20.h,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.end,
+                                                  spacing: 10.w,
+                                                  children: [
+                                                    TextButton(
+                                                      onPressed: () =>
+                                                          Get.back(),
+                                                      child: Text('Cancal'),
+                                                    ),
+                                                    ElevatedButton(
+                                                        onPressed: () async {
+                                                          if (documentId !=
+                                                              null) {
+                                                            await controller
+                                                                .deleteVehicle(
+                                                                    documentId!);
+                                                            homecontroller
+                                                                .resetTabIndex();
+                                                            Get.offAll(() =>
+                                                                HomeView());
+                                                          }
+                                                        },
+                                                        child: Text(
+                                                          "Delete",
+                                                          style: TextStyle(
+                                                              color: AppColors
+                                                                  .white),
+                                                        ))
+                                                  ],
+                                                )
+                                              ],
+                                            ),
+                                          );
+                                        });
+                                  },
+                                  child: Text(
+                                    'Delele',
+                                    style: TextStyle(
+                                        fontSize: 20, color: AppColors.white),
+                                  )),
+                            ),
+                            SizedBox(
+                              height: 5.h,
+                            ),
+                            SizedBox(
+                              width: double.infinity,
+                              child: ElevatedButton(
+                                  onPressed: () async {
+                                    if (_formkey.currentState!.validate()) {
+                                      if (documentId != null) {
+                                        await controller
+                                            .updateVehicle(documentId!);
+                                        homecontroller.resetTabIndex();
+                                        Get.offAll(() => HomeView());
+                                      }
+                                    }
+                                  },
+                                  child: Text(
+                                    'Update',
+                                    style: TextStyle(
+                                        fontSize: 20, color: AppColors.white),
+                                  )),
+                            ),
+                          ],
+                        )
+                      : SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton(
+                              onPressed: () async {
+                                if (_formkey.currentState!.validate()) {
+                                  final user = signupcontroller.userModel.value;
+                                  if (user != null) {
+                                    await controller.saveVehicleToFirebase(
+                                        userId: user.uid);
+                                    homecontroller.resetTabIndex();
+                                    Get.offAll(() => HomeView());
+                                  }
+                                }
+                              },
+                              child: Text(
+                                'Register',
+                                style: TextStyle(
+                                    fontSize: 20, color: AppColors.white),
+                              )),
+                        ),
                   SizedBox(
                     height: 20.h,
                   ),

@@ -50,7 +50,7 @@ class SignupView extends GetView<SignupController> {
                   TextFormField(
                     controller: controller.nameController,
                     decoration: InputDecoration(
-                      hintText: 'John Deo',
+                      hintText: 'Your name',
                       prefixIcon: Icon(
                         Icons.person,
                         color: Colors.black.withValues(alpha: 0.50),
