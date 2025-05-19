@@ -73,7 +73,7 @@ class AddVehicleDetailView extends StatelessWidget {
                     controller: controller.nameController,
                     readOnly: edit == true,
                     decoration: InputDecoration(
-                      hintText: 'Suzuki Cultus',
+                      hintText: 'Vehicle name',
                       prefixIcon: Icon(
                         Icons.car_crash_outlined,
                         color: Colors.black.withValues(alpha: 0.50),
