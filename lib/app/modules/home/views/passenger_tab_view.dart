@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:vehicle_booking/app/data/app_colors.dart';
 import 'package:vehicle_booking/app/data/util/featured_vehicle_container.dart';
 import 'package:vehicle_booking/app/data/util/search_form_field.dart';
 import 'package:vehicle_booking/app/modules/home/controllers/home_controller.dart';
@@ -14,7 +15,14 @@ class PassengerTabView extends StatelessWidget {
     return Column(
       children: [
         TabBar(
+          dividerColor: AppColors.white,
           controller: controller.tabController,
+          indicator: UnderlineTabIndicator(
+            borderSide: BorderSide(width: 4.w, color: AppColors.green),
+          ),
+          labelColor: AppColors.black,
+          unselectedLabelColor: AppColors.grey,
+          labelStyle: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w500),
           tabs: const [
             Tab(text: 'All Cars'),
             Tab(text: 'AC Cars'),
