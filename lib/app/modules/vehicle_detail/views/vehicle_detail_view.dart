@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:vehicle_booking/app/data/app_colors.dart';
 import 'package:vehicle_booking/app/data/util/custom_appbar.dart';
+import 'package:vehicle_booking/app/modules/chat/views/chat_view.dart';
 
 import '../controllers/vehicle_detail_controller.dart';
 
@@ -33,7 +34,14 @@ class VehicleDetailView extends GetView<VehicleDetailController> {
     Get.put(VehicleDetailController());
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: CustomAppBar(title: 'Vehicle Details View'),
+      appBar: CustomAppBar(
+        title: 'Vehicle Details View',
+        chatOntap: () {
+          Get.to(() => ChatView(
+                title: number,
+              ));
+        },
+      ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
         child: SingleChildScrollView(
