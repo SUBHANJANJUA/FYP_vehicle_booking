@@ -32,6 +32,7 @@ class BykeTabview extends StatelessWidget {
                         child: FeaturedVehicleContainer(
                           name: vehicle.name,
                           number: vehicle.number,
+                          deriveruserId: vehicle.userId,
                           location: vehicle.location,
                           type: vehicle.vehicleType,
                           ac: false,

@@ -51,6 +51,7 @@ class AppPages {
         number: '',
         location: '',
         description: '',
+        driverUserId: '',
         phone: '',
       ),
       binding: VehicleDetailBinding(),
@@ -62,7 +63,11 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.CHAT,
-      page: () => const ChatView(),
+      page: () => ChatView(
+        currentUserId: '',
+        otherUserId: '',
+        otherUserName: '',
+      ),
       binding: ChatBinding(),
     ),
   ];

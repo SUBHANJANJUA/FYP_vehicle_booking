@@ -30,6 +30,7 @@ class YourVehicleView extends StatelessWidget {
                           name: vehicle.name,
                           number: vehicle.number,
                           location: vehicle.location,
+                          deriveruserId: vehicle.userId,
                           type: vehicle.vehicleType,
                           ac: vehicle.acType == "AC",
                           phone: vehicle.contact,

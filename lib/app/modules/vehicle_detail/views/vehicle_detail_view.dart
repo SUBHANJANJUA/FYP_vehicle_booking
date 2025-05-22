@@ -7,40 +7,48 @@ import 'package:get/get.dart';
 import 'package:vehicle_booking/app/data/app_colors.dart';
 import 'package:vehicle_booking/app/data/util/custom_appbar.dart';
 import 'package:vehicle_booking/app/modules/chat/views/chat_view.dart';
+import 'package:vehicle_booking/app/modules/signup/controllers/signup_controller.dart';
 
 import '../controllers/vehicle_detail_controller.dart';
 
 class VehicleDetailView extends GetView<VehicleDetailController> {
-  const VehicleDetailView({
+  VehicleDetailView({
     super.key,
     required this.name,
     required this.number,
     required this.location,
     required this.description,
     required this.phone,
+    required this.driverUserId,
     required this.type,
     this.ac,
   });
   final String name;
   final String number;
   final String location;
-
+  final String driverUserId;
   final String phone;
   final String type;
   final String description;
   final bool? ac;
+  final SignupController signupcontroller = Get.put(SignupController());
   @override
   Widget build(BuildContext context) {
+    final user = signupcontroller.userModel.value;
     Get.put(VehicleDetailController());
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: CustomAppBar(
         title: 'Vehicle Details View',
-        chatOntap: () {
-          Get.to(() => ChatView(
-                title: number,
-              ));
-        },
+        chatOntap: user!.uid != driverUserId
+            ? () {
+                Get.to(() => ChatView(
+                      currentUserId: user.uid,
+                      otherUserId: driverUserId,
+                      otherUserName: number,
+                    ));
+              }
+            : null,
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),

@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:vehicle_booking/app/data/app_colors.dart';
 import 'package:vehicle_booking/app/modules/add_vehicle/views/add_vehicle_view.dart';
+import 'package:vehicle_booking/app/modules/chat/views/chat_list_view.dart';
 import 'package:vehicle_booking/app/modules/home/views/byke_tab_view.dart';
 import 'package:vehicle_booking/app/modules/home/views/passenger_tab_view.dart';
 import 'package:vehicle_booking/app/modules/home/views/home_tab_view.dart';
@@ -87,6 +88,20 @@ class HomeView extends GetView<HomeController> {
                 ],
               );
             })),
+        actions: [
+          signupcontroller.driver.value
+              ? Padding(
+                  padding: EdgeInsets.only(right: 20.w),
+                  child: InkWell(
+                    onTap: () => Get.to(() => ChatListView()),
+                    child: Icon(
+                      Icons.message,
+                      color: AppColors.green,
+                    ),
+                  ),
+                )
+              : SizedBox.shrink()
+        ],
         backgroundColor: AppColors.white,
       ),
       body: Obx(() {

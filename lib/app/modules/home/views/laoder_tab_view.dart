@@ -33,6 +33,7 @@ class LoaderTabview extends StatelessWidget {
                           name: vehicle.name,
                           number: vehicle.number,
                           location: vehicle.location,
+                          deriveruserId: vehicle.userId,
                           type: vehicle.vehicleType,
                           ac: false,
                           phone: vehicle.contact,

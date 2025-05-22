@@ -14,6 +14,7 @@ class FeaturedVehicleContainer extends StatelessWidget {
     required this.number,
     required this.location,
     required this.description,
+    required this.deriveruserId,
     required this.type,
     required this.phone,
     this.ac,
@@ -25,6 +26,7 @@ class FeaturedVehicleContainer extends StatelessWidget {
   final String name;
   final String number;
   final String location;
+  final String deriveruserId;
   final String phone;
   final String description;
   final String type;
@@ -60,6 +62,7 @@ class FeaturedVehicleContainer extends StatelessWidget {
                 ac: ac,
                 description: description,
                 phone: phone,
+                driverUserId: deriveruserId,
               )),
       child: Container(
         padding: EdgeInsets.all(5.h),
